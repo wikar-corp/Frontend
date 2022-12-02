@@ -17,15 +17,15 @@ export const LoginOverlay = () => {
       zIndex="9999"
       //test - zamiast tego obsługa załadowania
       onClick={() => {
-        // setTimeout(() => {
-        //   setIsLoading(!isLoading);
-        // }, 1000);
+        setTimeout(() => {
+          setIsLoading(!isLoading);
+        }, 1000);
       }}
       //
       w="100vw"
       h="100vh"
-      transition={"0.5s"}
-      left={isLoading ? "0" : "100vw"}
+      transition={"0.8s"}
+      left={isLoading ? "0" : "200vw"}
       gridTemplateColumns="1fr 450px"
     >
       <WelcomeSection />

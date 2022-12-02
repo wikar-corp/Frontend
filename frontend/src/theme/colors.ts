@@ -6,7 +6,7 @@ export const colors = {
   },
   BACKGROUND_2: {
     LIGHT: "#f8f8f8",
-    DARK: "#121212",
+    DARK: "#1c1c1c",
   },
   BACKGROUND_3: {
     LIGHT: "#dadada",

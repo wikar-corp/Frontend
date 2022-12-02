@@ -1,4 +1,4 @@
-import { Button, Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import {
   loginUser,
@@ -35,6 +35,8 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
     }
   };
 
+  const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
+
   return (
     <Flex
       flexDirection="column"
@@ -43,6 +45,7 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
       pt="200px"
       position="relative"
       alignItems="center"
+      bgColor={bg}
     >
       <ChevronLeftIcon
         position="absolute"

@@ -1,9 +1,11 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { Logo } from "../../Layout/Navigation/Logo/logo";
 import { DisplayedElement } from "./signInForm";
 
 export const Default = ({ setElement }: { setElement: any }) => {
+  const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
+
   return (
     <Flex
       px="60px"
@@ -11,6 +13,7 @@ export const Default = ({ setElement }: { setElement: any }) => {
       alignItems="center"
       pt="200px"
       gap="60px"
+      bgColor={bg}
     >
       <Logo />
       <Flex flexDirection="column" gap="13px" alignItems="center">

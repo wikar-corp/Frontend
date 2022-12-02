@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Logo } from "../../Layout/Navigation/Logo/logo";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
@@ -16,6 +16,8 @@ export const Register = ({ setElement }: { setElement: any }) => {
     setPassword(e.target.value);
   };
 
+  const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
+
   return (
     <Flex
       flexDirection="column"
@@ -24,6 +26,7 @@ export const Register = ({ setElement }: { setElement: any }) => {
       pt="200px"
       alignItems="center"
       position="relative"
+      bgColor={bg}
     >
       <ChevronLeftIcon
         position="absolute"

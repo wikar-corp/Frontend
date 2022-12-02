@@ -14,7 +14,7 @@ export const WelcomeSection = () => {
       left={signedIn ? "0" : "-450px"}
       //test - obsługa jeśli jest zalogowany
       onClick={() => {
-        setSignedIn(!signedIn);
+        //setSignedIn(!signedIn);
       }}
       //
     >

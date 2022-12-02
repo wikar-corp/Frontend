@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAuthState } from "../../../providers/Authenticate";
-import { SignInForm } from "./signInForm";
+import { SignInForm } from "./SignInForm/signInForm";
 import { WelcomeSection } from "./welcomeSection";
 
 export const LoginOverlay = () => {
@@ -17,9 +17,9 @@ export const LoginOverlay = () => {
       zIndex="9999"
       //test - zamiast tego obsługa załadowania
       onClick={() => {
-        setTimeout(() => {
-          setIsLoading(!isLoading);
-        }, 1000);
+        // setTimeout(() => {
+        //   setIsLoading(!isLoading);
+        // }, 1000);
       }}
       //
       w="100vw"

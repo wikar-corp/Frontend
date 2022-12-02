@@ -1,4 +1,5 @@
 import { AddIcon, CalendarIcon, CheckCircleIcon, EmailIcon, SettingsIcon } from "@chakra-ui/icons";
+import { Calendar } from "components/pages/Calendar/calendar";
 
 interface RouteItem {
 	path: string,
@@ -10,7 +11,7 @@ interface RouteItem {
 export const routes : RouteItem[] = [
 	{
 		path: '/calendar',
-		element: <>Calendar</>,
+		element: <Calendar/>,
 		icon: <CalendarIcon/>,
 		name: "calendar"
 	},

@@ -28,8 +28,10 @@ const NavItem = ({
         </Flex>
         <Box
           textTransform="capitalize"
-          fontSize="16px"
-          fontWeight="bold"
+          letterSpacing="0.03em"
+          fontSize="14px"
+          fontWeight="900"
+          fontFamily="Lato"
           opacity="0.9"
         >
           {content}

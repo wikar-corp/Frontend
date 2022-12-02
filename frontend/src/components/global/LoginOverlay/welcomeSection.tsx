@@ -1,4 +1,10 @@
-import { Flex, Spinner, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Spinner,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 
 export const WelcomeSection = () => {
@@ -25,23 +31,18 @@ export const WelcomeSection = () => {
       {signedIn ? (
         <Spinner boxSize="50px" />
       ) : (
-        <Flex
-          flexDirection="column"
-          gap="30px"
-          width="100%"
-          justifyContent="center"
-          overflowWrap="break-word"
-          p="50px"
-        >
-          <Text fontSize="60px" fontWeight="700">
-            Welcome, it's our hackaton app.
-          </Text>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
-            officia sapiente, earum quis, harum quidem eum reprehenderit beatae
-            commodi assumenda nostrum veritatis non, odio nemo et architecto
-            nulla minus asperiores?
-          </Text>
+        <Flex width="100%" overflowWrap="break-word" p="80px">
+          <Flex maxW="700px" flexDirection="column" gap="30px">
+            <Heading fontSize="60px" fontWeight="700">
+              Welcome, it's our hackaton app.
+            </Heading>
+            <Text>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
+              officia sapiente, earum quis, harum quidem eum reprehenderit
+              beatae commodi assumenda nostrum veritatis non, odio nemo et
+              architecto nulla minus asperiores?
+            </Text>
+          </Flex>
         </Flex>
       )}
     </Flex>

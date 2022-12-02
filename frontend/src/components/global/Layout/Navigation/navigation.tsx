@@ -16,9 +16,22 @@ const NavItem = ({
 }) => {
   return (
     <Link to={path}>
-      <Flex gap="15px" padding="15px 20px" align="center" borderRadius="12px" _hover={{bg: 'rgba(0,0,0,0.05)'}}>
-        <Flex align="center" opacity="0.4">{icon}</Flex>
-        <Box textTransform="capitalize" fontSize='16px' fontWeight="bold" opacity="0.9">
+      <Flex
+        gap="15px"
+        padding="15px 20px"
+        align="center"
+        borderRadius="12px"
+        _hover={{ bg: "rgba(0,0,0,0.05)" }}
+      >
+        <Flex align="center" opacity="0.4">
+          {icon}
+        </Flex>
+        <Box
+          textTransform="capitalize"
+          fontSize="16px"
+          fontWeight="bold"
+          opacity="0.9"
+        >
           {content}
         </Box>
       </Flex>
@@ -39,7 +52,7 @@ export const Navigation = () => {
     >
       <Logo />
       <Flex flexDir="column" gap="10px">
-        {routes.map((route) => (
+        {routes.map((route: any) => (
           <NavItem path={route.path} content={route.name} icon={route.icon} />
         ))}
       </Flex>

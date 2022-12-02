@@ -17,9 +17,9 @@ export const LoginOverlay = () => {
       zIndex="9999"
       //test - zamiast tego obsługa załadowania
       onClick={() => {
-        // setTimeout(() => {
-        //   setIsLoading(!isLoading);
-        // }, 1000);
+        setTimeout(() => {
+          setIsLoading(!isLoading);
+        }, 1000);
       }}
       //
       w="100vw"

@@ -1,5 +1,6 @@
 import { BellIcon, LockIcon, SettingsIcon } from "@chakra-ui/icons"
 import { Box, Flex, Grid } from "@chakra-ui/react"
+import { ColorModeSwitcher } from "components/global/colorModeSwitcher"
 
 export const UserSettings = () => {
 	return <Grid m="0px 20px"templateColumns="auto 1fr" gap="14px" pt="20px" borderTop="1px solid rgba(0,0,0,0.1)">
@@ -7,7 +8,7 @@ export const UserSettings = () => {
 		<Flex justify="center" flexDir="column" gap="6px" lineHeight="100%">
 			<Flex fontSize="14px" fontWeight="bold">Daniel Wikarek</Flex>
 			<Flex gap="10px">
-				Settings
+				<ColorModeSwitcher/>
 				<LockIcon w="14px" color={"gray"}/>
 			</Flex>
 		</Flex>

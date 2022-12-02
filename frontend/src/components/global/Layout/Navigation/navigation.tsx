@@ -18,7 +18,7 @@ const NavItem = ({
     <Link to={path}>
       <Flex gap="15px" padding="15px 20px" align="center" borderRadius="12px" _hover={{bg: 'rgba(0,0,0,0.05)'}}>
         <Flex align="center" opacity="0.4">{icon}</Flex>
-        <Box textTransform="capitalize" fontSize='16px' fontWeight="bold" opacity="0.9">
+        <Box textTransform="capitalize" letterSpacing="0.03em" fontSize='14px' fontWeight="900" fontFamily="Lato" opacity="0.9">
           {content}
         </Box>
       </Flex>

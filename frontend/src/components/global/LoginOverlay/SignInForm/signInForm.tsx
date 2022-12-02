@@ -16,8 +16,10 @@ export const SignInForm = () => {
 
   const typeOptions: any = {
     [DisplayedElement.DEFAULT]: () => <Default setElement={setElement} />,
-    [DisplayedElement.SIGNIN]: () => <SignInUsingAccount />,
-    [DisplayedElement.REGISTER]: () => <Register />,
+    [DisplayedElement.SIGNIN]: () => (
+      <SignInUsingAccount setElement={setElement} />
+    ),
+    [DisplayedElement.REGISTER]: () => <Register setElement={setElement} />,
   };
 
   const connectType = useMemo(() => {

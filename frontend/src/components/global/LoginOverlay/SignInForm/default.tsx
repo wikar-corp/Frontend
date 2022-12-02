@@ -46,11 +46,13 @@ export const Default = ({ setElement }: { setElement: any }) => {
           Sign in using account
         </Button>
         <Flex as="span">
-          Don’t have account yet?
+          Don’t have account yet?&nbsp;
           <Text
             color="blue"
+            cursor="pointer"
             as="span"
             onClick={() => setElement(DisplayedElement.REGISTER)}
+            _hover={{ opacity: 0.6 }}
           >
             Create Account
           </Text>

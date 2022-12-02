@@ -1,4 +1,4 @@
-import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAuthState } from "../../../providers/Authenticate";
 import { SignInForm } from "./signInForm";
@@ -7,14 +7,14 @@ import { WelcomeSection } from "./welcomeSection";
 export const LoginOverlay = () => {
   const userDetails = useAuthState();
 
-  //test
+  //test - domyślnie ma przetrzymywać informację o załadowaniu danych
   const [isLoading, setIsLoading] = useState<boolean>(true);
   //
 
   return (
     <Grid
       pos="fixed"
-      //test
+      //test - zamiast tego obsługa załadowania
       onClick={() => {
         setTimeout(() => {
           setIsLoading(!isLoading);

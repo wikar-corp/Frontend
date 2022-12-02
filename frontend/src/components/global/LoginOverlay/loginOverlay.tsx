@@ -24,8 +24,8 @@ export const LoginOverlay = () => {
       //
       w="100vw"
       h="100vh"
-      transition={"0.5s"}
-      left={isLoading ? "0" : "100vw"}
+      transition={"0.8s"}
+      left={isLoading ? "0" : "200vw"}
       gridTemplateColumns="1fr 450px"
     >
       <WelcomeSection />

@@ -1,7 +1,7 @@
 export const colors = {
   BRAND: "blue",
   BACKGROUND_1: {
-    LIGHT: "#dadada",
+    LIGHT: "#FAFAFA",
     DARK: "#121212",
   },
   BACKGROUND_2: {

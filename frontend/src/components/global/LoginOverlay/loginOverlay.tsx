@@ -14,6 +14,7 @@ export const LoginOverlay = () => {
   return (
     <Grid
       pos="fixed"
+      zIndex="9999"
       //test - zamiast tego obsługa załadowania
       onClick={() => {
         setTimeout(() => {

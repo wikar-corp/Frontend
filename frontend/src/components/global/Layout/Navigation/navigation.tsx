@@ -16,9 +16,11 @@ const NavItem = ({
 }) => {
   return (
     <Link to={path}>
-      <Flex gap="20px" padding="15px 20px" align="center" borderRadius="12px" bg="red">
-        <Box w="20px">{icon}</Box>
-        <Box textTransform="capitalize" fontWeight="bold">{content}</Box>
+      <Flex gap="15px" padding="15px 20px" align="center" borderRadius="12px" _hover={{bg: 'rgba(0,0,0,0.05)'}}>
+        <Flex align="center" opacity="0.4">{icon}</Flex>
+        <Box textTransform="capitalize" fontSize='16px' fontWeight="bold" opacity="0.9">
+          {content}
+        </Box>
       </Flex>
     </Link>
   );
@@ -32,12 +34,14 @@ export const Navigation = () => {
       bgColor={bg}
       w="250px"
       gap="70px"
-      padding="20px"
+      padding="35px 20px"
       templateRows="auto 1fr auto"
     >
       <Logo />
       <Flex flexDir="column" gap="10px">
-        {routes.map((route) => <NavItem path={route.path} content={route.name} icon={route.icon}/>)}
+        {routes.map((route) => (
+          <NavItem path={route.path} content={route.name} icon={route.icon} />
+        ))}
       </Flex>
       <UserSettings />
     </Grid>

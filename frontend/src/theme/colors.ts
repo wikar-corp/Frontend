@@ -1,11 +1,11 @@
 export const colors = {
   BRAND: "blue",
   BACKGROUND_1: {
-    LIGHT: "#FAFAFA",
+    LIGHT: "#Fefefe",
     DARK: "#121212",
   },
   BACKGROUND_2: {
-    LIGHT: "#dadada",
+    LIGHT: "#f8f8f8",
     DARK: "#121212",
   },
   BACKGROUND_3: {

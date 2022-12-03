@@ -68,7 +68,14 @@ export const TimeBlock = ({
       }}
     >
       {name}
-      <Box pos="absolute" w="100%" opacity="0" h="100%" bg="rgba(255,255,255,0.3)" _hover={{opacity: '1'}} />
+      <Box
+        pos="absolute"
+        w="100%"
+        opacity="0"
+        h="100%"
+        bg="rgba(255,255,255,0.3)"
+        _hover={{ opacity: "1" }}
+      />
       {isOpen && (
         <Grid
           w="35vw"
@@ -81,8 +88,12 @@ export const TimeBlock = ({
           gridTemplateRows="auto 1fr auto"
           gap="30px"
           p="25px"
+          cursor="default"
         >
-          <Text color="black">{name}</Text>
+          <Text color="black" fontSize="25px" fontWeight="600">
+            {name}
+          </Text>
+
           <Droppable droppableId={name}>
             {(provided: any) => (
               <Flex
@@ -92,6 +103,21 @@ export const TimeBlock = ({
                 gap="10px"
                 color="black"
               >
+                {tasksArr.length <= 0 && (
+                  <Flex
+                    h="90%"
+                    w="100%"
+                    bg="white"
+                    justifyContent="center"
+                    alignItems="center"
+                    borderRadius="15px"
+                    letterSpacing="0.1rem"
+                    fontWeight="700"
+                    fontSize="20px"
+                  >
+                    DROP HERE
+                  </Flex>
+                )}
                 {tasksArr.map((task: any, index) => (
                   <Task
                     dueDate={new Date()}

@@ -43,15 +43,12 @@ export const WelcomeSection = () => {
         <Spinner boxSize="50px" />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
-          <Flex maxW="700px" flexDirection="column" gap="30px">
-            <Heading fontSize="60px" fontWeight="700">
-              Welcome to SampleName.
+          <Flex maxW="650px" flexDirection="column" gap="30px">
+            <Heading fontSize="80px" fontWeight="700">
+              Welcome to Timenage.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
-              officia sapiente, earum quis, harum quidem eum reprehenderit
-              beatae commodi assumenda nostrum veritatis non, odio nemo et
-              architecto nulla minus asperiores?
+              Application that helps to integrate work time as efficiently as&nbsp;possible in your daily life! 
             </Text>
           </Flex>
         </Flex>

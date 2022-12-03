@@ -23,7 +23,7 @@ interface Block {
   timeSpan: number;
 }
 
-export const CalendarColumn = () => {
+export const CalendarColumn = ({ tasksAdded }: { tasksAdded: any }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
@@ -42,10 +42,17 @@ export const CalendarColumn = () => {
 
   return (
     <Grid pos="relative">
-      <Flex flexDir="column" h="70px" w="100%" pos="sticky" top="0" align="center" borderBottom="1px solid gray">
-		  <Box>Wtorek</Box>
-		  <Box fontSize="24px">21</Box>
-        
+      <Flex
+        flexDir="column"
+        h="70px"
+        w="100%"
+        pos="sticky"
+        top="0"
+        align="center"
+        borderBottom="1px solid gray"
+      >
+        <Box>Wtorek</Box>
+        <Box fontSize="24px">21</Box>
       </Flex>
 
       <Grid
@@ -149,13 +156,23 @@ export const CalendarColumn = () => {
         {!currentlyAddedBlock &&
           blocks.map((el) => {
             return (
-              <TimeBlock date={el.date} timeSpan={el.timeSpan} name={el.name} />
+              <TimeBlock
+                date={el.date}
+                timeSpan={el.timeSpan}
+                name={el.name}
+                tasksAdded={tasksAdded}
+              />
             );
           })}
         {currentlyAddedBlock &&
           blocks.concat([currentlyAddedBlock]).map((el) => {
             return (
-              <TimeBlock date={el.date} timeSpan={el.timeSpan} name={el.name} />
+              <TimeBlock
+                date={el.date}
+                timeSpan={el.timeSpan}
+                name={el.name}
+                tasksAdded={tasksAdded}
+              />
             );
           })}
       </Grid>

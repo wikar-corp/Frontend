@@ -16,48 +16,66 @@ export const Calendar = () => {
 
   const [num, setNum] = useState<number>(0);
   const [tasksList, updateTasksList] = useState(tasks);
-  const [tasksAdded, updateTasksAdded] = useState<any[]>([]);
+  const [tasksAdded, setTasksAdded] = useState(new Map());
 
   const handleOnDragEnd = (result: any) => {
     if (!result.destination) return;
 
-    if (result.destination.droppableId === "slot") {
+    if (
+      result.destination.droppableId &&
+      result.destination.droppableId !== "tasks"
+    ) {
       setNum(num + 1);
       tasksList.splice(result.source.index, 1);
-      tasksAdded.push(result);
-      console.log(tasksAdded);
+      console.log(tasksAdded.get(result.destination.droppableId));
+      setTasksAdded(
+        tasksAdded.set(
+          result.destination.droppableId,
+          (tasksAdded.get(result.destination.droppableId) ?? []).concat([
+            result,
+          ])
+        )
+      );
+
+      //   tasksAdded[result.destination.droppableId].push(result);
+      console.log(tasksAdded.get(result.destination.droppableId));
     }
 
-    const items = Array.from(tasksList);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    updateTasksList(items);
+    console.log("END");
+    if (result.destination.droppableId === "tasks") {
+      const items = Array.from(tasksList);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      updateTasksList(items);
+    }
   };
 
   return (
-    <DragDropContext onDragDropEnd={(result: any) => handleOnDragEnd(result)}>
-      <Grid templateRows="auto 1fr" maxH="100vh">
-        <Grid gridColumnStart="0" gridColumnEnd="1">
-          <CalendarHeader />
-        </Grid>
-        <Grid gridTemplateColumns="auto 1fr" pos="relative" overflowY="scroll">
-          <Grid bg={tasksBg} w="200px" pos="sticky" top="0" h="100%">
-            <TasksList tasksList={tasksList} />
+    <Flex overflow="auto">
+      <DragDropContext onDragEnd={(result: any) => handleOnDragEnd(result)}>
+        <Grid templateRows="auto 1fr" maxH="100vh">
+          <Grid gridColumnStart="0" gridColumnEnd="1">
+            <CalendarHeader />
           </Grid>
-          <Grid gridTemplateColumns="auto 1fr">
-            <Timestamps />
-            <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
-              <CalendarColumn />
-              <CalendarColumn />
-              <CalendarColumn />
-              <CalendarColumn />
-              <CalendarColumn />
-              <CalendarColumn />
-              <CalendarColumn />
+          <Grid gridTemplateColumns="auto 1fr" overflowY="scroll">
+            <Grid bg={tasksBg} w="200px" top="0" h="100%">
+              <TasksList tasksList={tasksList} />
+            </Grid>
+            <Grid gridTemplateColumns="auto 1fr" zIndex="1">
+              <Timestamps />
+              <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn tasksAdded={tasksAdded} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </DragDropContext>
+      </DragDropContext>
+    </Flex>
   );
 };

@@ -14,6 +14,7 @@ export const TasksList = ({ tasksList }: { tasksList: any }) => {
           gap="10px"
           {...provided.droppableProps}
           ref={provided.innerRef}
+          zIndex="999"
         >
           {tasksList.map((task: any, index: any) => {
             return (

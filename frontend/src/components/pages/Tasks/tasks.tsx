@@ -27,6 +27,7 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Task } from "./Task/task";
+import axios from "axios";
 
 export const Tasks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,6 +37,8 @@ export const Tasks = () => {
   const [urgency, setUrgency] = useState<number>(1);
 
   const addNewTask = () => {
+
+    
     console.log(dueDate, taskName, urgency);
   };
 

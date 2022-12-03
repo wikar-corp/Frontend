@@ -21,6 +21,7 @@ const NavItem = ({
         padding="15px 20px"
         align="center"
         borderRadius="12px"
+        
         _hover={{ bg: "rgba(0,0,0,0.05)" }}
       >
         <Flex align="center" opacity="0.4">
@@ -48,6 +49,7 @@ export const Navigation = () => {
     <Grid
       bgColor={bg}
       w="250px"
+      borderRight="1px solid rgba(0,0,0,0.1)"
       gap="70px"
       padding="35px 20px"
       templateRows="auto 1fr auto"

@@ -5,11 +5,12 @@ import { AppWrapper } from "./components/global/AppWrapper/appWrapper";
 import { AuthProvider } from "./providers/Authenticate";
 
 import '@fontsource/lato'
+import { UserProvider } from "providers/User/useUser";
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <AuthProvider>
+    <UserProvider>
       <AppWrapper />
-    </AuthProvider>
+    </UserProvider>
   </ChakraProvider>
 );

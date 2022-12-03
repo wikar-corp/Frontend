@@ -64,7 +64,7 @@ export const Calendar = () => {
             </Grid>
             <Grid gridTemplateColumns="auto 1fr" zIndex="1">
               <Timestamps />
-              <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
+              <Grid templateColumns="repeat(7, 140px)" overflow="scroll">
                 {Array.from({ length: 7 }, () => (
                   <CalendarColumn
                     tasksAdded={tasksAdded}

@@ -53,12 +53,13 @@ export const CalendarColumn = ({
     <Grid pos="relative">
       <Flex
         flexDir="column"
-        h="70px"
+        h="85px"
+        pt="15px"
         w="100%"
         pos="sticky"
         top="0"
         align="center"
-        borderBottom="1px solid gray"
+        borderBottom="1px solid rgba(0,0,0,0.1)"
       >
         <Box>Wtorek</Box>
         <Box fontSize="24px">21</Box>
@@ -101,15 +102,15 @@ export const CalendarColumn = ({
         }}
         templateRows="repeat(96,20px)"
         templateColumns="1fr"
-        borderLeft="1px solid gray"
-        w="200px"
+        borderLeft="1px solid rgba(0,0,0,0.1)"
+        w="140px"
         position="relative"
         bg={`repeating-linear-gradient(
 		to bottom,
 		${"white"} 0px,
 		${"white"} 79px,
-		${"gray"} 79px,
-		${"gray"} 80px
+		${"rgba(0,0,0,0.1)"} 79px,
+		${"rgba(0,0,0,0.1)"} 80px
 	  )`}
       >
         <Drawer

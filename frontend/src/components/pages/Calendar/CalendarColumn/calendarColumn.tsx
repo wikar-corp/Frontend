@@ -18,6 +18,7 @@ import { TimeBlock } from "../TimeBlock/timeBlock";
 
 interface Block {
   date: Date;
+  name: string;
   timeSpan: number;
 }
 
@@ -30,113 +31,131 @@ export const CalendarColumn = () => {
     {
       date: new Date(),
       timeSpan: 4,
+      name: "something",
     },
   ]);
 
+  const [currentlyAddedBlock, setCurrentlyAddedBlock] = useState<Block | null>(
+    null
+  );
+
   return (
-    <Grid
-      onClick={(e: any) => {
-        var rect = e.target.getBoundingClientRect();
-
-        var x = e.clientX - rect.left; //x position within the element.
-        var y = e.clientY - rect.top; //y position within the element.
-        console.log("Left? : " + x + " ; Top? : " + y + ".");
-
-        const newStart = Math.floor((y / rect.height) * 96);
-
-        onOpen();
-
-        var d = new Date();
-
-        console.log((newStart / 4) % 4);
-
-        d.setHours(
-          Math.floor(newStart / 4),
-          (Math.floor(newStart) % 4) + 1,
-          0,
-          0
-        );
-
-        console.log(d);
-
-        console.log(newStart);
-
-        setBlocks((prev) =>
-          prev.concat([
-            {
-              date: d,
-              timeSpan: 4,
-            },
-          ])
-        );
-      }}
-      templateRows="repeat(96,20px)"
-      templateColumns="1fr"
-      borderLeft="1px solid gray"
-      w="200px"
-      position="relative"
-      bg={`repeating-linear-gradient(
-		to bottom,
-		${'white'} 0px,
-		${'white'} 79px,
-		${'gray'} 79px,
-		${'gray'} 80px
-	  )`}
-    >
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={() => {
-          onClose();
-          setBlocks((prev) => prev.slice(0, -1));
-        }}
-      >
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Add new time block</DrawerHeader>
-
-          <DrawerBody>
-            <Input placeholder="Block name" onChange={(e) => {}} />
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button
-              variant="outline"
-              mr={3}
-              onClick={() => {
-                onClose();
-                setBlocks((prev) => prev.slice(0, -1));
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                onClose();
-              }}
-            >
-              Save
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-      <Box
-
-        padding="0px"
-		w="100%"
-
-        position="absolute"
-        top="0px"
-	
-  
-      >
+    <Grid pos="relative">
+      <Box h="40px" w="100%" pos="sticky" top="0">
         Wtorek
       </Box>
 
-      {blocks.map((el) => {
-        return <TimeBlock date={el.date} timeSpan={el.timeSpan} />;
-      })}
+      <Grid
+        onClick={(e: any) => {
+          var rect = e.target.getBoundingClientRect();
+
+          var x = e.clientX - rect.left; //x position within the element.
+          var y = e.clientY - rect.top; //y position within the element.
+          console.log("Left? : " + x + " ; Top? : " + y + ".");
+
+          const newStart = Math.floor((y / rect.height) * 96);
+
+          onOpen();
+
+          var d = new Date();
+
+          console.log((newStart / 4) % 4);
+
+          d.setHours(
+            Math.floor(newStart / 4),
+            (Math.floor(newStart) % 4) + 1,
+            0,
+            0
+          );
+
+          console.log(d);
+
+          console.log(newStart);
+
+          setCurrentlyAddedBlock((prev) => {
+            return {
+              date: d,
+              timeSpan: 4,
+              name: "New TimeBlock",
+            };
+          });
+        }}
+        templateRows="repeat(96,20px)"
+        templateColumns="1fr"
+        borderLeft="1px solid gray"
+        w="200px"
+        position="relative"
+        bg={`repeating-linear-gradient(
+		to bottom,
+		${"white"} 0px,
+		${"white"} 79px,
+		${"gray"} 79px,
+		${"gray"} 80px
+	  )`}
+      >
+        <Drawer
+          isOpen={isOpen}
+          placement="right"
+          onClose={() => {
+            onClose();
+            setCurrentlyAddedBlock(null);
+          }}
+        >
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Add new time block</DrawerHeader>
+
+            <DrawerBody>
+              <Input
+                placeholder="Block name"
+                onChange={(e) => {
+                  if (currentlyAddedBlock != null)
+                    setCurrentlyAddedBlock((prev: any) => {
+                      return { ...prev, name: e.target.value };
+                    });
+                }}
+              />
+            </DrawerBody>
+
+            <DrawerFooter>
+              <Button
+                variant="outline"
+                mr={3}
+                onClick={() => {
+                  onClose();
+                  setCurrentlyAddedBlock(null);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  onClose();
+                  if (currentlyAddedBlock != null) {
+                    setBlocks((prev) => prev.concat([currentlyAddedBlock]));
+                    setCurrentlyAddedBlock(null);
+                  }
+                }}
+              >
+                Save
+              </Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+        {!currentlyAddedBlock &&
+          blocks.map((el) => {
+            return (
+              <TimeBlock date={el.date} timeSpan={el.timeSpan} name={el.name} />
+            );
+          })}
+        {currentlyAddedBlock &&
+          blocks.concat([currentlyAddedBlock]).map((el) => {
+            return (
+              <TimeBlock date={el.date} timeSpan={el.timeSpan} name={el.name} />
+            );
+          })}
+      </Grid>
     </Grid>
   );
 };

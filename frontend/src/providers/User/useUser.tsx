@@ -17,12 +17,14 @@ const API_URL = "https://263a-157-158-99-97.eu.ngrok.io";
 interface IContext extends IState {
   login: (username: string, password: string) => void;
   register: (username: string, password: string) => void;
+  isLogged: boolean;
 }
 
 const emptyContext: IContext = {
   ...emptyState,
   login: (username: string, password: string) => null,
   register: (username: string, password: string) => null,
+  isLogged: false,
 };
 
 const Context = createContext(emptyContext);
@@ -40,7 +42,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         comparePassword: password,
       })
       .then(() => {
-        alert();
+        //alert();
         return true;
       })
       .catch((err: any) => {
@@ -79,6 +81,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
         login,
         register,
+        isLogged,
       }}
     >
       {children}

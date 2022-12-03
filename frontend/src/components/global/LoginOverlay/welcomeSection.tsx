@@ -16,7 +16,7 @@ export const WelcomeSection = () => {
 
   useEffect(() => {
     if (jwt != "") {
-      alert("XD");
+      //alert("XD");
       setTimeout(() => {
         setSignedIn(true);
       }, 1000);

@@ -43,13 +43,8 @@ export const WelcomeSection = () => {
         <Spinner boxSize="50px"  />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
-<<<<<<< HEAD
           <Flex maxW="700px" flexDirection="column" gap="30px" color="white">
             <Heading fontSize="80px" fontWeight="700">
-=======
-          <Flex maxW="700px" flexDirection="column" gap="30px">
-            <Heading fontSize="60px" fontWeight="700">
->>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
               Welcome, it's our hackaton app.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">

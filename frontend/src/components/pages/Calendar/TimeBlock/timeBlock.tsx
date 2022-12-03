@@ -1,24 +1,7 @@
-import {
-  Box,
-  Button,
-  CloseButton,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  Flex,
-  Grid,
-  Input,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { TasksList } from "../takskList";
-import { tasks } from "../tasks";
 
 export const TimeBlock = ({
   date,
@@ -52,7 +35,6 @@ export const TimeBlock = ({
   useEffect(() => {
     if (tasksAdded.get(name)) {
       setTasksArr(tasksAdded.get(name));
-      console.log("tasks added", tasksAdded);
     }
   }, [tasksAdded]);
 
@@ -77,7 +59,7 @@ export const TimeBlock = ({
           h="100vh"
           top="0"
           right="0"
-          background={"white"}
+          background={"#dadada"}
           position="fixed"
           zIndex="1"
           gridTemplateRows="auto 1fr auto"
@@ -126,6 +108,8 @@ export const TimeBlock = ({
             )}
           </Droppable>
           <Button
+            bgColor="#FF3F3F"
+            _hover={{ opacity: 0.6 }}
             onClick={(e: any) => {
               e.stopPropagation();
               onClose();

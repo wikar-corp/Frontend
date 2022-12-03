@@ -1,7 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
-import { tasks } from "./tasks";
+import React from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
   return (

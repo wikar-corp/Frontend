@@ -7,14 +7,13 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   Flex,
   Grid,
   Input,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TimeBlock } from "../TimeBlock/timeBlock";
 
 interface Block {

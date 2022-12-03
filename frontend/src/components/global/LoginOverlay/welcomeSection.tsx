@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useUser } from "providers/User/useUser";
+import { Logo } from "../Layout/Navigation/Logo/logo";
 
 export const WelcomeSection = () => {
   //test - domyślnie ma to przetrzymywać informację o tym czy użytkownik jest zalogowany (z providera)
@@ -33,7 +34,7 @@ export const WelcomeSection = () => {
       left={signedIn ? "0" : "-450px"}
       //test - obsługa jeśli jest zalogowany
       onClick={() => {
-        //setSignedIn(!signedIn);
+        setSignedIn(!signedIn);
       }}
       //
       alignItems="center"
@@ -41,7 +42,8 @@ export const WelcomeSection = () => {
       justifyContent="center"
     >
       {signedIn ? (
-        <Spinner boxSize="50px" />
+        // <Spinner boxSize="50px" />
+        <Logo pulse />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
           <Flex maxW="650px" flexDirection="column" gap="30px">

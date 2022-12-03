@@ -47,7 +47,7 @@ export const Task = ({
   urgency: number;
   onClickLeftArrow?: any;
 }) => {
-  const { deleteTask, tickTask } = useUser();
+  const { deleteTask, tickTask, moveTask } = useUser();
 
   const handleDeleteTask = () => {
     deleteTask(id);
@@ -139,7 +139,7 @@ export const Task = ({
             bg="#f6f6f6"
             borderRadius="4px"
             transition="1s width"
-            onClick={onClickLeftArrow}
+            onClick={() => moveTask(id, null)}
           >
             <ArrowLeftIcon w="12px" color="white" />
           </Flex>

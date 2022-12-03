@@ -58,7 +58,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
             </Flex>
           )}
           {tasksList
-            .filter((el) => el.isCompleted == false)
+            .filter((el) => el.isCompleted == false && el.slotId === null)
             .map((task: any, index: any) => {
               return (
                 <Draggable key={task.id} draggableId={task.id} index={index}>

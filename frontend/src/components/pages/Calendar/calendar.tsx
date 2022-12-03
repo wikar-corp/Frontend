@@ -14,7 +14,7 @@ export const Calendar = () => {
     "BACKGROUND_1.DARK"
   );
 
-  const { tasks } = useUser()
+  const { tasks, moveTask, getWeek, getSlots } = useUser();
 
   const [num, setNum] = useState<number>(0);
   const [tasksList, updateTasksList] = useState(tasks);
@@ -30,23 +30,27 @@ export const Calendar = () => {
       setNum(num + 1);
       const el = tasksList.splice(result.source.index, 1)[0];
       console.log(tasksAdded.get(result.destination.droppableId));
-      setTasksAdded(
-        (prev: any) =>
-          new Map([
-            ...prev,
-            [
-              result.destination.droppableId,
-              (tasksAdded.get(result.destination.droppableId) ?? []).concat([
-                el,
-              ]),
-            ],
-          ])
-      );
+      // setTasksAdded(
+      //   (prev: any) =>
+      //     new Map([
+      //       ...prev,
+      //       [
+      //         result.destination.droppableId,
+      //         (tasksAdded.get(result.destination.droppableId) ?? []).concat([
+      //           el,
+      //         ]),
+      //       ],
+      //     ])
+      // );
+
+      console.log(result);
+      moveTask(result.draggableId, result.destination.droppableId);
     }
 
     console.log("END");
     if (result.destination.droppableId === "tasks") {
       const items = Array.from(tasksList);
+      console.log(items);
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);
       updateTasksList(items);
@@ -70,6 +74,8 @@ export const Calendar = () => {
     setSundayDate(new Date());
     setMondayDate(addDays(mondayDate, 1 - dayName));
     setSundayDate(addDays(sundayDate, 7 - dayName));
+    getWeek(mondayDate);
+    getSlots();
   }, []);
 
   return (

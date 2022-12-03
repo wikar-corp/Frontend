@@ -42,7 +42,6 @@ const emptyContext: IContext = {
   ...emptyState,
   login: (username: string, password: string) => null,
   register: (username: string, password: string) => null,
-<<<<<<< HEAD
   addTimeblock: (date: Date, timespan: number, name: string, color: string) =>
     null,
   addTask: (
@@ -53,9 +52,6 @@ const emptyContext: IContext = {
   ) => null,
   deleteTask: (taskId: string) => null,
   tickTask: (taskId: string, value: boolean) => null,
-=======
-  isLogged: false,
->>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
 };
 
 const Context = createContext(emptyContext);

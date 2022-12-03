@@ -1,19 +1,30 @@
-import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
-import React, { useState } from "react";
 import {
-  loginUser,
-  useAuthDispatch,
-  useAuthState,
-} from "../../../../providers/Authenticate";
+  Box,
+  Button,
+  Flex,
+  Input,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 import { Logo } from "../../Layout/Navigation/Logo/logo";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { DisplayedElement } from "./signInForm";
+import axios from "axios";
+import { useUser } from "providers/User/useUser";
 
-export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
+const api = "https://263a-157-158-99-97.eu.ngrok.io";
+
+export const Login = ({ setElement }: { setElement: any }) => {
+  const { login } = useUser();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { loading, errorMessage } = useAuthState();
+  const handleLogin = async () => {
+    const result = await login(email, password);
+    alert(result);
+  };
 
   const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
@@ -23,20 +34,16 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-  };
-
   const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
 
   return (
     <Flex
       flexDirection="column"
-      gap="10px"
+      gap="30px"
       px="60px"
       pt="200px"
-      position="relative"
       alignItems="center"
+      position="relative"
       bgColor={bg}
     >
       <ChevronLeftIcon
@@ -51,7 +58,7 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
       />
       <Logo />
       <Flex flexDirection="column" gap="10px" w="100%">
-        <Text>Email:</Text>
+        <Text>username:</Text>
         <Input
           value={email}
           onChange={handleEmailChange}
@@ -63,10 +70,13 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
           type="password"
           onChange={handlePasswordChange}
         />
-        <Button mt="20px" isLoading={loading} onClick={handleLogin}>
-          Sign in
+        <Button mt="20px" onClick={() => handleLogin()}>
+          Login
         </Button>
       </Flex>
+      <Box>
+        Don't have account yet? <Box onClick={() => setElement(DisplayedElement.REGISTER)}>Create Account</Box>
+      </Box>
     </Flex>
   );
 };

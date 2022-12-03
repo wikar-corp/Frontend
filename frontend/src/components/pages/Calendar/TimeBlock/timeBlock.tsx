@@ -1,4 +1,4 @@
-import { Button, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
@@ -60,13 +60,15 @@ export const TimeBlock = ({
       padding="10px"
       gridRowStart={row}
       gridRowEnd={row + timeSpan}
+      cursor="pointer"
+      position="relative"
       onClick={(e) => {
         e.stopPropagation();
         onOpen();
       }}
     >
       {name}
-
+      <Box pos="absolute" w="100%" opacity="0" h="100%" bg="rgba(255,255,255,0.3)" _hover={{opacity: '1'}} />
       {isOpen && (
         <Grid
           w="35vw"

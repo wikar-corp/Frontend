@@ -17,7 +17,12 @@ export const CalendarHeader = ({
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
 
   return (
-    <Flex padding="20px 40px" color={bg} justifyContent="space-between">
+    <Flex
+      padding="20px 40px"
+      color={bg}
+      justifyContent="space-between"
+      borderBottom="1px solid rgba(0,0,0,0.1)"
+    >
       <Flex fontSize="40px" color="black">
         {mondayDate.getDate()}-{sundayDate.getDate()}
         &nbsp;{mondayDate.toLocaleString("en-us", { month: "long" })}

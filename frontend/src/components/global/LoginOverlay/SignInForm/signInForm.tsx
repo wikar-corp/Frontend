@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
+import { useEffect } from "react";
 import { Default } from "./default";
+import { Login } from "./login";
 import { Register } from "./register";
 import { SignInUsingAccount } from "./signInUsingAccount";
 
@@ -15,21 +17,23 @@ export const SignInForm = () => {
   );
 
   const typeOptions: any = {
-    [DisplayedElement.DEFAULT]: () => <Default setElement={setElement} />,
-    [DisplayedElement.SIGNIN]: () => (
-      <SignInUsingAccount setElement={setElement} />
-    ),
+    [DisplayedElement.DEFAULT]: () => <Login setElement={setElement} />,
+    [DisplayedElement.SIGNIN]: () => <SignInUsingAccount setElement={setElement} />,
     [DisplayedElement.REGISTER]: () => <Register setElement={setElement} />,
   };
 
+  useEffect(() => {
+    alert(element)
+  }, [element])
+
   const connectType = useMemo(() => {
-    if (element === DisplayedElement.DEFAULT) {
+    if (element == DisplayedElement.DEFAULT) {
       return DisplayedElement.DEFAULT;
     }
-    if (element === DisplayedElement.SIGNIN) {
+    if (element == DisplayedElement.SIGNIN) {
       return DisplayedElement.SIGNIN;
     }
-    if (element === DisplayedElement.REGISTER) {
+    if (element == DisplayedElement.REGISTER) {
       return DisplayedElement.REGISTER;
     }
     return DisplayedElement.DEFAULT;

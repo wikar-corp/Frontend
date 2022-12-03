@@ -41,7 +41,7 @@ export const Calendar = () => {
           <CalendarHeader />
         </Grid>
         <Grid gridTemplateColumns="auto 1fr" pos="relative" overflowY="scroll">
-          <Grid bg={tasksBg} w="200px" pos="sticky" top="0" h="100%">
+          <Grid bg={tasksBg} w="200px" h="100%">
             <TasksList tasksList={tasksList} />
           </Grid>
           <Grid gridTemplateColumns="auto 1fr">

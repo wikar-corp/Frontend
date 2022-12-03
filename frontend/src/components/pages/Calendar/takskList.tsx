@@ -18,13 +18,28 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
           {...provided.droppableProps}
           ref={provided.innerRef}
           zIndex="999"
-        > 
-          <Flex padding="15px 35px" align="center" justifyContent="space-between"  fontSize="20px" bg="white" fontWeight="bold"  borderBottom="1px solid rgba(0,0,0,0.1)">
+        >
+          <Flex
+            padding="15px 35px"
+            align="center"
+            justifyContent="space-between"
+            fontSize="20px"
+            bg="none"
+            fontWeight="bold"
+            borderBottom="1px solid rgba(0,0,0,0.1)"
+          >
             Active tasks
-            <Link to="/tasks"><Flex  gap="15px" align="center" fontWeight="light" fontSize="13px">
-              Task List
-              <ArrowRightIcon color="gray"/>
-              </Flex></Link>
+            <Link to="/tasks">
+              <Flex
+                gap="15px"
+                align="center"
+                fontWeight="light"
+                fontSize="13px"
+              >
+                Task List
+                <ArrowRightIcon color="gray" />
+              </Flex>
+            </Link>
           </Flex>
           {tasksList.length === 0 && "no tasks"}
           {tasksList.map((task: any, index: any) => {

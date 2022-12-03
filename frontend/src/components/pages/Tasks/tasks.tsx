@@ -37,8 +37,6 @@ export const Tasks = () => {
   const [urgency, setUrgency] = useState<number>(1);
 
   const addNewTask = () => {
-
-    
     console.log(dueDate, taskName, urgency);
   };
 
@@ -92,7 +90,7 @@ export const Tasks = () => {
               <Box>Task name</Box>
               <Input
                 placeholder={"Task name"}
-				defaultValue={"Task name"}
+                defaultValue={"Task name"}
                 onChange={(e) => setTaskName(e.target.value)}
               ></Input>
             </Flex>
@@ -104,7 +102,7 @@ export const Tasks = () => {
               />
             </Flex>
             <Flex flexDir="column" gap="12px">
-              <Box>Urgency</Box>
+              <Box>Urgency: {urgency}</Box>
               <Slider
                 aria-label="slider-ex-1"
                 max={5}
@@ -126,6 +124,7 @@ export const Tasks = () => {
               mr={3}
               onClick={() => {
                 onClose();
+                setUrgency(1);
               }}
             >
               Cancel
@@ -135,6 +134,7 @@ export const Tasks = () => {
               onClick={() => {
                 addNewTask();
                 onClose();
+                setUrgency(1);
               }}
             >
               Save

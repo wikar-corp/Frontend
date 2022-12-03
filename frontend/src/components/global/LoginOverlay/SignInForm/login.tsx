@@ -51,16 +51,6 @@ export const Login = ({ setElement }: { setElement: any }) => {
       position="relative"
       bgColor={bg}
     >
-      <ChevronLeftIcon
-        position="absolute"
-        left="25px"
-        top="25px"
-        color="white"
-        boxSize="35px"
-        cursor="pointer"
-        _hover={{ opacity: 0.6 }}
-        onClick={() => setElement(DisplayedElement.DEFAULT)}
-      />
       <Logo />
       <Flex flexDirection="column" gap="10px" w="100%">
         <Text>Username:</Text>

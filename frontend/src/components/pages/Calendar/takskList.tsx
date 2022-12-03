@@ -1,6 +1,7 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Task } from "../Tasks/Task/task";
 
 export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
   return (
@@ -8,7 +9,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
       {(provided: any) => (
         <Flex
           flexDirection="column"
-          alignItems="center"
+          //alignItems="center"
           py="20px"
           gap="10px"
           {...provided.droppableProps}
@@ -20,17 +21,22 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
             return (
               <Draggable key={task.id} draggableId={task.id} index={index}>
                 {(provided: any) => (
-                  <Flex
-                    borderRadius="10px"
-                    width="90%"
-                    bgColor="#dadada"
-                    p="10px"
+                  <Box
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    {task?.name}
-                  </Flex>
+                    <Task
+                      dueDate={new Date()}
+                      name={task.name}
+                      completed={false}
+                      urgency={3}
+                      minimalInfo
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    />
+                  </Box>
                 )}
               </Draggable>
             );

@@ -39,7 +39,7 @@ export const Task = ({
   dueDate: Date;
   name: string;
   id: string;
-  estimatedTime: number,
+  estimatedTime: number;
   completed: boolean;
   isEditing?: boolean;
   minimalInfo?: boolean;
@@ -96,15 +96,23 @@ export const Task = ({
           >
             {name}
           </Box>
-          <Flex fontSize="13px" fontWeight="300" color="#9B9B9B">
-            {dueDate.getDate() + " " + months[dueDate.getMonth()]}
-          </Flex>
+          {minimalInfo ? (
+            <Flex fontSize="14px" opacity="0.6" fontWeight="bold">
+              {estimatedTime} min
+            </Flex>
+          ) : (
+            <Flex fontSize="13px" fontWeight="300" color="#9B9B9B">
+              {dueDate.getDate() + " " + months[dueDate.getMonth()]}
+            </Flex>
+          )}
         </Flex>
       </Flex>
       <Flex align="center" gap="25px">
-        <Flex fontSize="14px" opacity="0.6" fontWeight="bold">
-          {estimatedTime} min
-        </Flex>
+        {!minimalInfo && (
+          <Flex fontSize="14px" opacity="0.6" fontWeight="bold">
+            {estimatedTime} min
+          </Flex>
+        )}
         <Urgency value={urgency} />
         {!minimalInfo && !drawerInfo && (
           <Flex

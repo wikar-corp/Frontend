@@ -30,8 +30,7 @@ const NavItem = ({
         borderRadius="12px"
         flexDir="column"
         _hover={{ bg: "rgba(0,0,0,0.3)" }}
-        bg={pathname === path ? "rgba(0,0,0,0.1)" : "none"}
-
+        bg={pathname === path ? "rgba(0,0,0,0.4)" : "none"}
       >
         <Flex w="40px" align="center" opacity="0.4">
           {icon}

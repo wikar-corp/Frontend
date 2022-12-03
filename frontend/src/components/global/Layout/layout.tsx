@@ -4,7 +4,7 @@ import { Navigation } from "./Navigation/navigation";
 import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
-  const outletBg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
+  const outletBg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
 
   return (
     <Grid h="100vh" w="100vw" gridTemplateColumns="auto 1fr">

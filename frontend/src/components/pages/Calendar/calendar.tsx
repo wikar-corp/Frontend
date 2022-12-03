@@ -14,7 +14,7 @@ export const Calendar = () => {
     "BACKGROUND_1.DARK"
   );
 
-  const { tasks, moveTask } = useUser();
+  const { tasks, moveTask, getWeek, getSlots } = useUser();
 
   const [num, setNum] = useState<number>(0);
   const [tasksList, updateTasksList] = useState(tasks);
@@ -74,6 +74,8 @@ export const Calendar = () => {
     setSundayDate(new Date());
     setMondayDate(addDays(mondayDate, 1 - dayName));
     setSundayDate(addDays(sundayDate, 7 - dayName));
+    getWeek(mondayDate);
+    getSlots();
   }, []);
 
   return (

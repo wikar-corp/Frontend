@@ -29,7 +29,7 @@ export const TimeBlock = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [tasksArr, setTasksArr] = useState<any[]>([]);
 
-  const { tasks } = useUser();
+  const { tasks, saveSlot } = useUser();
   const [allTimeSlot, setAllTimeSlot] = useState(0);
   const sloteMinutes = timeSpan * 15;
   const [percent, setPercent] = useState(0);

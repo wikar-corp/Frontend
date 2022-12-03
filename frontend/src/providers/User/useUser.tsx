@@ -35,6 +35,14 @@ interface IContext extends IState {
   getWeek: (date: Date) => void;
   logout: () => void;
   moveTask: (taskId: string, slotId: string | null) => void;
+  // getSlots: () => void;
+  saveSlot: (
+    name: string,
+    start: Date,
+    quarters: number,
+    color: string
+  ) => void;
+  getSlots: () => void;
 }
 
 const emptyContext: IContext = {
@@ -54,6 +62,10 @@ const emptyContext: IContext = {
   getWeek: (date: Date) => null,
   logout: () => null,
   moveTask: (taskId: string, slotId: string | null) => null,
+  // getSlots: () => null,
+  saveSlot: (name: string, start: Date, quarters: number, color: string) =>
+    null,
+  getSlots: () => null,
 };
 
 const Context = createContext(emptyContext);
@@ -108,9 +120,45 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getWeek = () => {
     axios
-      .get(API_URL + "/getWeek")
+      .get(API_URL + "/getWeek?hexIdentificator=" + state.jwt)
       .then((res) => {
         console.log(res);
+        return true;
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
+
+  const saveSlot = (
+    name: string,
+    start: Date,
+    quarters: number,
+    color: string
+  ) => {
+    axios
+      .post(API_URL + "/slots", {
+        categoryOfActivity: 0,
+        name: name,
+        start: start,
+        quartersNumber: quarters,
+        color: color,
+        hexIdentificator: state.jwt,
+      })
+      .then((res) => {
+        console.log(res);
+        return true;
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
+
+  const getSlots = () => {
+    axios
+      .get(API_URL + "/slots?hexIdentificator=" + state.jwt)
+      .then((res) => {
+        dispatch({ ...state, blocks: res.data });
         return true;
       })
       .catch((err: any) => {
@@ -285,8 +333,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         moveTask,
         login,
         register,
+        saveSlot,
         addTimeblock,
         deleteTask,
+        getSlots,
         logout,
       }}
     >

@@ -18,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useUser } from "providers/User/useUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TimeBlock } from "../TimeBlock/timeBlock";
 import { CirclePicker } from "react-color";
 
@@ -46,7 +46,7 @@ export const CalendarColumn = ({
 
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
 
-  const { addTimeblock } = useUser();
+  const { addTimeblock, saveSlot, getSlots } = useUser();
 
   const [blocks, setBlocks] = useState<Block[]>([
     {
@@ -72,6 +72,8 @@ export const CalendarColumn = ({
       return { ...prev, timeSpan: value };
     });
   };
+
+  useEffect(() => {});
 
   return (
     <Grid pos="relative">
@@ -209,6 +211,12 @@ export const CalendarColumn = ({
                       currentlyAddedBlock.color
                     );
                     setCurrentlyAddedBlock(null);
+                    saveSlot(
+                      currentlyAddedBlock.name,
+                      currentlyAddedBlock.date,
+                      currentlyAddedBlock.timeSpan,
+                      currentlyAddedBlock.color
+                    );
                   }
                 }}
               >

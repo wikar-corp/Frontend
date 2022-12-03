@@ -142,6 +142,7 @@ export const CalendarColumn = ({
 
             <DrawerBody>
               <Input
+                mb="30px"
                 placeholder="Block name"
                 onChange={(e) => {
                   if (currentlyAddedBlock != null)

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { Task } from "../../Tasks/Task/task";
+import { useUser } from "../../../../providers/User/useUser";
 
 export const TimeBlock = ({
   date,
@@ -27,6 +28,8 @@ export const TimeBlock = ({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [tasksArr, setTasksArr] = useState<any[]>([]);
+
+  const { tasks } = useUser();
 
   useEffect(() => {
     const blockIndex = Math.floor(
@@ -105,7 +108,7 @@ export const TimeBlock = ({
                 gap="10px"
                 color="black"
               >
-                {tasksArr.length <= 0 && (
+                {tasks.filter((val) => val.name === name).length <= 0 && (
                   <Flex
                     h="90%"
                     w="100%"
@@ -120,32 +123,36 @@ export const TimeBlock = ({
                     DROP HERE
                   </Flex>
                 )}
-                {tasksArr.map((task: any, index) => (
-                  <Task
-                    urgency={task.priority}
-                    completed={task.isCompleted}
-                    dueDate={new Date()}
-                    name={task.taskName}
-                    id={task.id}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    drawerInfo
-                    onClickLeftArrow={() => {
-                      const items = Array.from(tasksList);
-                      items.push(task);
-                      updateTasksList(items);
-                      setTasksArr(
-                        tasksArr.filter((t) => {
-                          return t.id !== task.id;
-                        })
-                      );
-                      setTasksAdded(
-                        (prev: any) => new Map([prev.set(name, tasksArr)])
-                      );
-                    }}
-                  />
-                ))}
+
+                {tasks
+                  .filter((val) => val.name === name)
+                  .map((task: any, index) => (
+                    <Task
+                      urgency={task.priority}
+                      estimatedTime={task.estimatedMinutes}
+                      completed={task.isCompleted}
+                      dueDate={new Date()}
+                      name={task.taskName}
+                      id={task.id}
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      drawerInfo
+                      onClickLeftArrow={() => {
+                        const items = Array.from(tasksList);
+                        items.push(task);
+                        updateTasksList(items);
+                        setTasksArr(
+                          tasksArr.filter((t) => {
+                            return t.id !== task.id;
+                          })
+                        );
+                        setTasksAdded(
+                          (prev: any) => new Map([prev.set(name, tasksArr)])
+                        );
+                      }}
+                    />
+                  ))}
 
                 {provided.placeholder}
               </Flex>

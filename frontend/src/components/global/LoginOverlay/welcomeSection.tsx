@@ -18,9 +18,8 @@ export const WelcomeSection = () => {
   useEffect(() => {
     if (jwt != "") {
       //alert("XD");
-      setTimeout(() => {
-        setSignedIn(true);
-      }, 1000);
+      setSignedIn(true);
+      setTimeout(() => {}, 0);
     }
   }, [jwt]);
 
@@ -38,7 +37,7 @@ export const WelcomeSection = () => {
       }}
       //
       alignItems="center"
-      borderRadius="0 80px 80px 0"
+      borderRadius="0 80px 0 0"
       justifyContent="center"
     >
       {signedIn ? (

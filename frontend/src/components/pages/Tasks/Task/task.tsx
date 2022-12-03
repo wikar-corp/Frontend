@@ -116,8 +116,9 @@ export const Task = ({
             bg="#f6f6f6"
             borderRadius="4px"
             transition="1s width"
+            onClick={onClickLeftArrow}
           >
-            <ArrowLeftIcon w="12px" color="white" onClick={onClickLeftArrow} />
+            <ArrowLeftIcon w="12px" color="white"  />
           </Flex>
         )}
       </Flex>

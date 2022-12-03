@@ -4,7 +4,9 @@ export const Logo = () => {
   return (
     <Flex align="center" fontWeight="bold" gap="8px" marginLeft="20px">
       <Image src="/assets/brand/logo-small.svg" alt="brand logo" w="20px" />
-      <Box fontSize="20px" fontWeight="bold">TestApp</Box>
+      <Box fontSize="20px" fontWeight="bold">
+        Timenage
+      </Box>
     </Flex>
   );
 };

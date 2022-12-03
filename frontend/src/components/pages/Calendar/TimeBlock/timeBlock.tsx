@@ -1,31 +1,29 @@
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  Grid,
-  Input,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Droppable } from "react-beautiful-dnd";
 
 export const TimeBlock = ({
   date,
   timeSpan,
   name,
+  tasksAdded,
+  updateTasksList,
+  tasksList,
+  setTasksAdded,
 }: {
   date: Date;
   timeSpan: number;
   name: string;
+  tasksAdded: any;
+  updateTasksList: any;
+  tasksList: any[];
+  setTasksAdded: any;
 }) => {
   const [row, setRow] = useState<number>(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [tasksArr, setTasksArr] = useState<any[]>([]);
 
   useEffect(() => {
     const blockIndex = Math.floor(
@@ -33,6 +31,12 @@ export const TimeBlock = ({
     );
     setRow(blockIndex);
   });
+
+  useEffect(() => {
+    if (tasksAdded.get(name)) {
+      setTasksArr(tasksAdded.get(name));
+    }
+  }, [tasksAdded]);
 
   return (
     <Grid
@@ -48,39 +52,73 @@ export const TimeBlock = ({
       }}
     >
       {name}
-      <Drawer isOpen={isOpen} placement="right" onClose={() => {}}>
-        <DrawerContent>
-          <DrawerCloseButton />
 
-          <DrawerBody>
-            <Input
-              placeholder="Block name"
-              defaultValue={name}
-              onChange={(e) => {}}
-            />
-          </DrawerBody>
+      {isOpen && (
+        <Grid
+          w="350px"
+          h="100vh"
+          top="0"
+          right="0"
+          background={"#dadada"}
+          position="fixed"
+          zIndex="1"
+          gridTemplateRows="auto 1fr auto"
+          gap="30px"
+          p="25px"
+        >
+          <Text color="black">{name}</Text>
+          <Droppable droppableId={name}>
+            {(provided: any) => (
+              <Flex
+                {...provided.draggable}
+                ref={provided.innerRef}
+                flexDirection="column"
+                gap="10px"
+              >
+                {tasksArr.map((task: any, index) => (
+                  <Flex
+                    color="black"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    {task.name}
+                    <Button
+                      onClick={() => {
+                        const items = Array.from(tasksList);
+                        items.push(task);
+                        console.log(items);
+                        updateTasksList(items);
+                        setTasksArr(
+                          tasksArr.filter((t) => {
+                            return t.id !== task.id;
+                          })
+                        );
+                        setTasksAdded(
+                          (prev: any) => new Map([prev.set(name, tasksArr)])
+                        );
+                      }}
+                    >
+                      DELETE
+                    </Button>
+                  </Flex>
+                ))}
 
-          <DrawerFooter>
-            <Button
-              variant="outline"
-              mr={3}
-              onClick={() => {
-                onClose();
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                onClose();
-              }}
-            >
-              Save
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+                {provided.placeholder}
+              </Flex>
+            )}
+          </Droppable>
+          <Button
+            bgColor="#FF3F3F"
+            _hover={{ opacity: 0.6 }}
+            onClick={(e: any) => {
+              e.stopPropagation();
+              onClose();
+            }}
+          >
+            Close
+          </Button>
+        </Grid>
+      )}
     </Grid>
   );
 };

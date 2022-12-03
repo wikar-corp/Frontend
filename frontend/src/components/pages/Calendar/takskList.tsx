@@ -1,9 +1,8 @@
 import { Flex } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
-import { tasks } from "./tasks";
+import React from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
-export const TasksList = ({ tasksList }: { tasksList: any }) => {
+export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
   return (
     <Droppable droppableId="tasks">
       {(provided: any) => (
@@ -14,10 +13,12 @@ export const TasksList = ({ tasksList }: { tasksList: any }) => {
           gap="10px"
           {...provided.droppableProps}
           ref={provided.innerRef}
+          zIndex="999"
         >
+          {tasksList.length === 0 && "no tasks"}
           {tasksList.map((task: any, index: any) => {
             return (
-              <Draggable key={task?.id} draggableId={task?.id} index={index}>
+              <Draggable key={task.id} draggableId={task.id} index={index}>
                 {(provided: any) => (
                   <Flex
                     borderRadius="10px"

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { tasks } from "./tasks";
 
-export const TasksList = ({ tasksList }: { tasksList: any }) => {
+export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
   return (
     <Droppable droppableId="tasks">
       {(provided: any) => (
@@ -16,9 +16,10 @@ export const TasksList = ({ tasksList }: { tasksList: any }) => {
           ref={provided.innerRef}
           zIndex="999"
         >
+          {tasksList.length === 0 && "no tasks"}
           {tasksList.map((task: any, index: any) => {
             return (
-              <Draggable key={task?.id} draggableId={task?.id} index={index}>
+              <Draggable key={task.id} draggableId={task.id} index={index}>
                 {(provided: any) => (
                   <Flex
                     borderRadius="10px"

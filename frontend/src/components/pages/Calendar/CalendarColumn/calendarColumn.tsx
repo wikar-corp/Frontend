@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TimeBlock } from "../TimeBlock/timeBlock";
 
 interface Block {
@@ -23,7 +23,17 @@ interface Block {
   timeSpan: number;
 }
 
-export const CalendarColumn = ({ tasksAdded }: { tasksAdded: any }) => {
+export const CalendarColumn = ({
+  tasksAdded,
+  updateTasksList,
+  tasksList,
+  setTasksAdded,
+}: {
+  tasksAdded: any;
+  updateTasksList: any;
+  tasksList: any[];
+  setTasksAdded: any;
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
@@ -161,6 +171,9 @@ export const CalendarColumn = ({ tasksAdded }: { tasksAdded: any }) => {
                 timeSpan={el.timeSpan}
                 name={el.name}
                 tasksAdded={tasksAdded}
+                updateTasksList={updateTasksList}
+                tasksList={tasksList}
+                setTasksAdded={setTasksAdded}
               />
             );
           })}
@@ -172,6 +185,9 @@ export const CalendarColumn = ({ tasksAdded }: { tasksAdded: any }) => {
                 timeSpan={el.timeSpan}
                 name={el.name}
                 tasksAdded={tasksAdded}
+                updateTasksList={updateTasksList}
+                tasksList={tasksList}
+                setTasksAdded={setTasksAdded}
               />
             );
           })}

@@ -8,6 +8,7 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
+  Flex,
   Grid,
   Input,
   Text,
@@ -16,6 +17,7 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
+import { TasksList } from "../takskList";
 import { tasks } from "../tasks";
 
 export const TimeBlock = ({
@@ -23,15 +25,22 @@ export const TimeBlock = ({
   timeSpan,
   name,
   tasksAdded,
+  updateTasksList,
+  tasksList,
+  setTasksAdded,
 }: {
   date: Date;
   timeSpan: number;
   name: string;
   tasksAdded: any;
+  updateTasksList: any;
+  tasksList: any[];
+  setTasksAdded: any;
 }) => {
   const [row, setRow] = useState<number>(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [tasksArr, setTasksArr] = useState<any[]>([]);
 
   useEffect(() => {
     const blockIndex = Math.floor(
@@ -40,41 +49,92 @@ export const TimeBlock = ({
     setRow(blockIndex);
   });
 
+  useEffect(() => {
+    if (tasksAdded.get(name)) {
+      setTasksArr(tasksAdded.get(name));
+      console.log("tasks added", tasksAdded);
+    }
+  }, [tasksAdded]);
+
   return (
-    <Droppable droppableId={name}>
-      {(provided: any) => (
+    <Grid
+      bg="BRAND"
+      borderRadius="4px"
+      color="white"
+      padding="10px"
+      gridRowStart={row}
+      gridRowEnd={row + timeSpan}
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen();
+      }}
+    >
+      {name}
+
+      {isOpen && (
         <Grid
-          bg="BRAND"
-          borderRadius="4px"
-          color="white"
-          padding="10px"
-          gridRowStart={row}
-          gridRowEnd={row + timeSpan}
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpen();
-          }}
-          {...provided.draggable}
-          ref={provided.innerRef}
+          w="350px"
+          h="100vh"
+          top="0"
+          right="0"
+          background={"white"}
+          position="fixed"
+          zIndex="1"
+          gridTemplateRows="auto 1fr auto"
+          gap="30px"
+          p="25px"
         >
-          {name}
-          {tasksAdded.length > 0 && <Text>{tasksAdded.get(name)}</Text>}
-          {isOpen && (
-            <Grid
-              w="200px"
-              h="100vh"
-              top="0"
-              right="0"
-              background={"white"}
-              position="fixed"
-              zIndex="1"
-            >
-              <CloseButton onClick={onClose} />
-            </Grid>
-          )}
-          {provided.placeholder}
+          <Text color="black">{name}</Text>
+          <Droppable droppableId={name}>
+            {(provided: any) => (
+              <Flex
+                {...provided.draggable}
+                ref={provided.innerRef}
+                flexDirection="column"
+                gap="10px"
+              >
+                {tasksArr.map((task: any, index) => (
+                  <Flex
+                    color="black"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    {task.name}
+                    <Button
+                      onClick={() => {
+                        const items = Array.from(tasksList);
+                        items.push(task);
+                        console.log(items);
+                        updateTasksList(items);
+                        setTasksArr(
+                          tasksArr.filter((t) => {
+                            return t.id !== task.id;
+                          })
+                        );
+                        setTasksAdded(
+                          (prev: any) => new Map([prev.set(name, tasksArr)])
+                        );
+                      }}
+                    >
+                      DELETE
+                    </Button>
+                  </Flex>
+                ))}
+
+                {provided.placeholder}
+              </Flex>
+            )}
+          </Droppable>
+          <Button
+            onClick={(e: any) => {
+              e.stopPropagation();
+              onClose();
+            }}
+          >
+            Close
+          </Button>
         </Grid>
       )}
-    </Droppable>
+    </Grid>
   );
 };

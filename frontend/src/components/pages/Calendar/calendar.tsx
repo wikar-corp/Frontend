@@ -1,5 +1,5 @@
 import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TasksList } from "./takskList";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { tasks } from "./tasks";
@@ -26,19 +26,23 @@ export const Calendar = () => {
       result.destination.droppableId !== "tasks"
     ) {
       setNum(num + 1);
-      tasksList.splice(result.source.index, 1);
+      const el = tasksList.splice(result.source.index, 1)[0];
       console.log(tasksAdded.get(result.destination.droppableId));
       setTasksAdded(
-        tasksAdded.set(
-          result.destination.droppableId,
-          (tasksAdded.get(result.destination.droppableId) ?? []).concat([
-            result,
+        (prev: any) =>
+          new Map([
+            ...prev,
+            [
+              result.destination.droppableId,
+              (tasksAdded.get(result.destination.droppableId) ?? []).concat([
+                el,
+              ]),
+            ],
           ])
-        )
       );
 
       //   tasksAdded[result.destination.droppableId].push(result);
-      console.log(tasksAdded.get(result.destination.droppableId));
+      //console.log(tasksAdded.get(result.destination.droppableId));
     }
 
     console.log("END");
@@ -64,13 +68,48 @@ export const Calendar = () => {
             <Grid gridTemplateColumns="auto 1fr" zIndex="1">
               <Timestamps />
               <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
-                <CalendarColumn tasksAdded={tasksAdded} />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                />
               </Grid>
             </Grid>
           </Grid>

@@ -2,6 +2,7 @@ import { Button, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
+import { Task } from "../../Tasks/Task/task";
 
 export const TimeBlock = ({
   date,
@@ -38,6 +39,19 @@ export const TimeBlock = ({
     }
   }, [tasksAdded]);
 
+  const handleClick = (task: any) => {
+    const items = Array.from(tasksList);
+    items.push(task);
+    console.log(items);
+    updateTasksList(items);
+    setTasksArr(
+      tasksArr.filter((t) => {
+        return t.id !== task.id;
+      })
+    );
+    setTasksAdded((prev: any) => new Map([prev.set(name, tasksArr)]));
+  };
+
   return (
     <Grid
       bg="BRAND"
@@ -55,7 +69,7 @@ export const TimeBlock = ({
 
       {isOpen && (
         <Grid
-          w="350px"
+          w="35vw"
           h="100vh"
           top="0"
           right="0"
@@ -74,33 +88,32 @@ export const TimeBlock = ({
                 ref={provided.innerRef}
                 flexDirection="column"
                 gap="10px"
+                color="black"
               >
                 {tasksArr.map((task: any, index) => (
-                  <Flex
-                    color="black"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    {task.name}
-                    <Button
-                      onClick={() => {
-                        const items = Array.from(tasksList);
-                        items.push(task);
-                        console.log(items);
-                        updateTasksList(items);
-                        setTasksArr(
-                          tasksArr.filter((t) => {
-                            return t.id !== task.id;
-                          })
-                        );
-                        setTasksAdded(
-                          (prev: any) => new Map([prev.set(name, tasksArr)])
-                        );
-                      }}
-                    >
-                      DELETE
-                    </Button>
-                  </Flex>
+                  <Task
+                    dueDate={new Date()}
+                    name={task.name}
+                    completed={false}
+                    urgency={3}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    drawerInfo
+                    onClickLeftArrow={() => {
+                      const items = Array.from(tasksList);
+                      items.push(task);
+                      updateTasksList(items);
+                      setTasksArr(
+                        tasksArr.filter((t) => {
+                          return t.id !== task.id;
+                        })
+                      );
+                      setTasksAdded(
+                        (prev: any) => new Map([prev.set(name, tasksArr)])
+                      );
+                    }}
+                  />
                 ))}
 
                 {provided.placeholder}

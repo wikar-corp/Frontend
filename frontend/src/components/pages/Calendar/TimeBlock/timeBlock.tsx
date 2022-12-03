@@ -43,6 +43,7 @@ export const TimeBlock = ({
 
   useEffect(() => {
     let sum = 0;
+    console.log("XD");
     tasks
       .filter((val) => val.slotId == name)
       .forEach((el) => {
@@ -121,7 +122,11 @@ export const TimeBlock = ({
                 w={`${Math.floor((allTimeSlot / (timeSpan * 15)) * 100)}%`}
                 h="20px"
                 maxW="100%"
-                bgColor="#FF3F3F"
+                bgColor={
+                  Math.floor((allTimeSlot / (timeSpan * 15)) * 100) > 100
+                    ? "#FF3F3F"
+                    : "green.300"
+                }
               />
             </Box>
           </Flex>

@@ -45,6 +45,7 @@ export const Register = ({ setElement }: { setElement: any }) => {
   };
 
   const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
+  const text = useColorModeValue("black", "white");
 
   return (
     <Flex
@@ -60,7 +61,7 @@ export const Register = ({ setElement }: { setElement: any }) => {
         position="absolute"
         left="25px"
         top="25px"
-        color="white"
+        color={text}
         boxSize="35px"
         cursor="pointer"
         _hover={{ opacity: 0.6 }}

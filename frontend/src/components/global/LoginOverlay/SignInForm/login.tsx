@@ -58,11 +58,11 @@ export const Login = ({ setElement }: { setElement: any }) => {
       />
       <Logo />
       <Flex flexDirection="column" gap="10px" w="100%">
-        <Text>username:</Text>
+        <Text>Username:</Text>
         <Input
           value={email}
           onChange={handleEmailChange}
-          placeholder="user@youremail.com"
+          placeholder="username"
         />
         <Text>Password:</Text>
         <Input
@@ -75,7 +75,10 @@ export const Login = ({ setElement }: { setElement: any }) => {
         </Button>
       </Flex>
       <Box>
-        Don't have account yet? <Box onClick={() => setElement(DisplayedElement.REGISTER)}>Create Account</Box>
+        Don't have account yet?{" "}
+        <Box onClick={() => setElement(DisplayedElement.REGISTER)}>
+          Create Account
+        </Box>
       </Box>
     </Flex>
   );

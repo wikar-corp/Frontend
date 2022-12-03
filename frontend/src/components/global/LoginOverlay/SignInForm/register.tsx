@@ -1,4 +1,11 @@
-import { Box, Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Logo } from "../../Layout/Navigation/Logo/logo";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
@@ -13,10 +20,12 @@ export const Register = ({ setElement }: { setElement: any }) => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleRegister = async () => {
     const result = await register(email, password);
-    setElement(DisplayedElement.DEFAULT)
+    setElement(DisplayedElement.DEFAULT);
   };
 
   const handleEmailChange = (e: any) => {
@@ -25,6 +34,14 @@ export const Register = ({ setElement }: { setElement: any }) => {
 
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
+  };
+
+  const handleRepeatPasswordChange = (e: any) => {
+    setRepeatPassword(e.target.value);
+  };
+
+  const checkPasswords = () => {
+    return password === repeatPassword;
   };
 
   const bg = useColorModeValue("BACKGROUND_1.LIGHT", "BACKGROUND_1.DARK");
@@ -55,7 +72,7 @@ export const Register = ({ setElement }: { setElement: any }) => {
         <Input
           value={email}
           onChange={handleEmailChange}
-          placeholder="user@youremail.com"
+          placeholder="username"
         />
         <Text>Password:</Text>
         <Input
@@ -63,11 +80,28 @@ export const Register = ({ setElement }: { setElement: any }) => {
           type="password"
           onChange={handlePasswordChange}
         />
-        <Button mt="20px" onClick={() => handleRegister()}>
+        <Text>Repeat password:</Text>
+        <Input
+          value={repeatPassword}
+          type="password"
+          onChange={handleRepeatPasswordChange}
+        />
+        <Button
+          mt="20px"
+          onClick={() => {
+            if (checkPasswords()) {
+              if (email === "") setErrorMessage("Username blank");
+              else {
+                setErrorMessage("");
+                handleRegister();
+              }
+            } else setErrorMessage("Passwords don't match");
+          }}
+        >
           Create account
         </Button>
+        {errorMessage !== "" && <Text color="#FF3F3F">{errorMessage}</Text>}
       </Flex>
-     
     </Flex>
   );
 };

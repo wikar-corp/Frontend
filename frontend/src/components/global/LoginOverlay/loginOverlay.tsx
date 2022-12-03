@@ -15,12 +15,11 @@ export const LoginOverlay = () => {
   //
 
   useEffect(() => {
-
     if (jwt != "") {
-      alert("XD")
+      alert("XD");
       setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 2000);
     }
   }, [jwt]);
 

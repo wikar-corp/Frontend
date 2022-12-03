@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ArrowRightIcon, CalendarIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -42,7 +42,9 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
               </Flex>
             </Link>
           </Flex>
-          {tasksList.length === 0 && <Flex>No tasks yet</Flex>}
+          {tasksList.length === 0 && <Flex align="center" mt="50px" flexDir='column' gap="30px">
+            <CalendarIcon boxSize="80px" opacity='0.5' /><Box>
+            No tasks yet. <Box display="inline" fontWeight="bold"><Link to="/tasks">Let's add one!</Link></Box></Box></Flex>}
           {tasksList
             .filter((el) => el.isCompleted == false)
             .map((task: any, index: any) => {

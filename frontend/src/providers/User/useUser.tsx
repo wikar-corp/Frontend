@@ -33,6 +33,7 @@ interface IContext extends IState {
   deleteTask: (taskId: string) => void;
   tickTask: (taskId: string, value: boolean) => void;
   getWeek: (date: Date) => void;
+  logout: () => void
 }
 
 const emptyContext: IContext = {
@@ -50,6 +51,7 @@ const emptyContext: IContext = {
   deleteTask: (taskId: string) => null,
   tickTask: (taskId: string, value: boolean) => null,
   getWeek: (date: Date) => null,
+  logout: () => null
 };
 
 const Context = createContext(emptyContext);
@@ -254,6 +256,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     return state.jwt != null;
   }, [state.jwt]);
 
+  const logout = () => {
+	  dispatch({...state, jwt: ""})
+	  setToken("")
+  }
+
   return (
     <Context.Provider
       value={{
@@ -265,6 +272,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         register,
         addTimeblock,
         deleteTask,
+		logout
       }}
     >
       {children}

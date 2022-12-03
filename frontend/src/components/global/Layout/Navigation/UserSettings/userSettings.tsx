@@ -4,7 +4,7 @@ import { ColorModeSwitcher } from "components/global/colorModeSwitcher";
 import { useUser } from "providers/User/useUser";
 
 export const UserSettings = () => {
-  const { nickname } = useUser();
+  const { nickname, logout } = useUser();
 
   return (
     <Grid
@@ -25,9 +25,9 @@ export const UserSettings = () => {
         <Flex fontSize="14px" fontWeight="bold">
           {nickname ? nickname : "Username"}
         </Flex>
-        <Flex gap="10px">
+        <Flex gap="10px" align="center">
           <ColorModeSwitcher />
-          <LockIcon w="14px" color={"gray"} />
+          <LockIcon onClick={logout} boxSize="17px" cursor="pointer" _hover={{opacity: 0.6}} w="14px" color={"#bfbfbf"} />
         </Flex>
       </Flex>
     </Grid>

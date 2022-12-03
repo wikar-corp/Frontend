@@ -2,7 +2,6 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Layout } from "../Layout/layout";
 import { LoginOverlay } from "../LoginOverlay/loginOverlay";
 import { routes } from "./routes";
-import { DragDropContext } from "react-beautiful-dnd";
 
 export const AppWrapper = () => {
   return (

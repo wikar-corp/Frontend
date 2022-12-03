@@ -5,12 +5,23 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useUser } from "providers/User/useUser";
 
 export const WelcomeSection = () => {
   //test - domyślnie ma to przetrzymywać informację o tym czy użytkownik jest zalogowany (z providera)
   const [signedIn, setSignedIn] = useState<boolean>(false);
   //
+  const { jwt } = useUser();
+
+  useEffect(() => {
+    if (jwt != "") {
+      //alert("XD");
+      setTimeout(() => {
+        setSignedIn(true);
+      }, 1000);
+    }
+  }, [jwt]);
 
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
 
@@ -22,7 +33,7 @@ export const WelcomeSection = () => {
       left={signedIn ? "0" : "-450px"}
       //test - obsługa jeśli jest zalogowany
       onClick={() => {
-        setSignedIn(!signedIn);
+        //setSignedIn(!signedIn);
       }}
       //
       alignItems="center"
@@ -32,8 +43,13 @@ export const WelcomeSection = () => {
         <Spinner boxSize="50px"  />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
+<<<<<<< HEAD
           <Flex maxW="700px" flexDirection="column" gap="30px" color="white">
             <Heading fontSize="80px" fontWeight="700">
+=======
+          <Flex maxW="700px" flexDirection="column" gap="30px">
+            <Heading fontSize="60px" fontWeight="700">
+>>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
               Welcome, it's our hackaton app.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">

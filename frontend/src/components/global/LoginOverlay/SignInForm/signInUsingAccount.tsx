@@ -51,11 +51,11 @@ export const SignInUsingAccount = ({ setElement }: { setElement: any }) => {
       />
       <Logo />
       <Flex flexDirection="column" gap="10px" w="100%">
-        <Text>Email:</Text>
+        <Text>Username:</Text>
         <Input
           value={email}
           onChange={handleEmailChange}
-          placeholder="user@youremail.com"
+          placeholder="username"
         />
         <Text>Password:</Text>
         <Input

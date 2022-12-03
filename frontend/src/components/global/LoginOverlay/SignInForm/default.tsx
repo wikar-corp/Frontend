@@ -24,7 +24,7 @@ export const Default = ({ setElement }: { setElement: any }) => {
   });
 
   const onSuccess = (res: any) => {
-    alert("udalo sie");
+    //alert("udalo sie");
   };
 
   const onFailure = (err: any) => {
@@ -32,7 +32,7 @@ export const Default = ({ setElement }: { setElement: any }) => {
   };
 
   const logOut = () => {
-    alert("essa");
+    //alert("essa");
   };
 
   return (

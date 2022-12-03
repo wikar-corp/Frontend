@@ -18,6 +18,7 @@ const API_URL = "https://263a-157-158-99-97.eu.ngrok.io";
 interface IContext extends IState {
   login: (username: string, password: string) => void;
   register: (username: string, password: string) => void;
+<<<<<<< HEAD
   addTimeblock: (
     date: Date,
     timespan: number,
@@ -32,12 +33,16 @@ interface IContext extends IState {
   ) => void;
   deleteTask: (taskId: string) => void;
   tickTask: (taskId: string, value: boolean) => void;
+=======
+  isLogged: boolean;
+>>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
 }
 
 const emptyContext: IContext = {
   ...emptyState,
   login: (username: string, password: string) => null,
   register: (username: string, password: string) => null,
+<<<<<<< HEAD
   addTimeblock: (date: Date, timespan: number, name: string, color: string) =>
     null,
   addTask: (
@@ -48,6 +53,9 @@ const emptyContext: IContext = {
   ) => null,
   deleteTask: (taskId: string) => null,
   tickTask: (taskId: string, value: boolean) => null,
+=======
+  isLogged: false,
+>>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
 };
 
 const Context = createContext(emptyContext);
@@ -151,7 +159,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         comparePassword: password,
       })
       .then(() => {
-        alert();
+        //alert();
         return true;
       })
       .catch((err: any) => {
@@ -248,8 +256,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         tickTask,
         login,
         register,
+<<<<<<< HEAD
         addTimeblock,
         deleteTask,
+=======
+        isLogged,
+>>>>>>> 77a92d061dc3b3ee7ee35220081c172611972a1b
       }}
     >
       {children}

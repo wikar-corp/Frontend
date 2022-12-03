@@ -1,5 +1,5 @@
 import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TasksList } from "./takskList";
 import { DragDropContext } from "react-beautiful-dnd";
 import { tasks } from "./tasks";
@@ -51,28 +51,111 @@ export const Calendar = () => {
     }
   };
 
+  const today = new Date();
+  let dayName = today.getDay();
+
+  const [mondayDate, setMondayDate] = useState<Date>(new Date());
+  const [sundayDate, setSundayDate] = useState<Date>(new Date());
+
+  const addDays = (date: Date, days: number) => {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  };
+
+  useEffect(() => {
+    setMondayDate(new Date());
+    setSundayDate(new Date());
+    setMondayDate(addDays(mondayDate, 1 - dayName));
+    setSundayDate(addDays(sundayDate, 7 - dayName));
+  }, []);
+
   return (
-    <Flex overflow="auto">
+    <Flex>
       <DragDropContext onDragEnd={(result: any) => handleOnDragEnd(result)}>
         <Grid templateRows="auto 1fr" maxH="100vh" bgColor={calendarBg}>
-          <Grid gridColumnStart="0" gridColumnEnd="1">
-            <CalendarHeader />
+          <Grid
+            gridColumnStart="0"
+            gridColumnEnd="1"
+            overflow="auto"
+            maxH="100vh"
+          >
+            <CalendarHeader
+              mondayDate={mondayDate}
+              sundayDate={sundayDate}
+              setMondayDate={setMondayDate}
+              setSundayDate={setSundayDate}
+              addDays={addDays}
+            />
           </Grid>
-          <Grid gridTemplateColumns="auto 1fr" overflowY="scroll">
-            <Grid bg={tasksBg} w="400px" top="0" h="100%">
+          <Grid gridTemplateColumns="auto 1fr" overflow="auto" maxH="100vh">
+            <Grid
+              bg={tasksBg}
+              w="400px"
+              top="0"
+              h="100%"
+              overflowY="scroll"
+              maxH="100vh"
+            >
               <TasksList tasksList={tasksList} />
             </Grid>
-            <Grid gridTemplateColumns="auto 1fr" zIndex="1">
+            <Grid
+              gridTemplateColumns="auto 1fr"
+              zIndex="1"
+              overflow="scroll"
+              maxH="100vh"
+            >
               <Timestamps />
-              <Grid templateColumns="repeat(7, 140px)" overflow="scroll">
-                {Array.from({ length: 7 }, () => (
-                  <CalendarColumn
-                    tasksAdded={tasksAdded}
-                    updateTasksList={updateTasksList}
-                    tasksList={tasksList}
-                    setTasksAdded={setTasksAdded}
-                  />
-                ))}
+              <Grid templateColumns="repeat(7, 200px)">
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={mondayDate}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 1)}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 2)}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 3)}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 4)}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 5)}
+                />
+                <CalendarColumn
+                  tasksAdded={tasksAdded}
+                  updateTasksList={updateTasksList}
+                  tasksList={tasksList}
+                  setTasksAdded={setTasksAdded}
+                  date={addDays(mondayDate, 6)}
+                />
               </Grid>
             </Grid>
           </Grid>

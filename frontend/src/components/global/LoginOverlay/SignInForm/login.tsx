@@ -20,10 +20,15 @@ export const Login = ({ setElement }: { setElement: any }) => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleLogin = async () => {
     const result = await login(email, password);
-    alert(result);
+    //alert(result);
+    if (result === undefined)
+      setTimeout(() => {
+        setErrorMessage("Invalid username or password");
+      }, 1500);
   };
 
   const handleEmailChange = (e: any) => {
@@ -58,11 +63,11 @@ export const Login = ({ setElement }: { setElement: any }) => {
       />
       <Logo />
       <Flex flexDirection="column" gap="10px" w="100%">
-        <Text>username:</Text>
+        <Text>Username:</Text>
         <Input
           value={email}
           onChange={handleEmailChange}
-          placeholder="user@youremail.com"
+          placeholder="username"
         />
         <Text>Password:</Text>
         <Input
@@ -70,13 +75,28 @@ export const Login = ({ setElement }: { setElement: any }) => {
           type="password"
           onChange={handlePasswordChange}
         />
-        <Button mt="20px" onClick={() => handleLogin()}>
+        <Button
+          mt="20px"
+          onClick={() => {
+            handleLogin();
+          }}
+        >
           Login
         </Button>
+        {errorMessage !== "" && <Text color="#FF3F3F">{errorMessage}</Text>}
       </Flex>
-      <Box>
-        Don't have account yet? <Box onClick={() => setElement(DisplayedElement.REGISTER)}>Create Account</Box>
-      </Box>
+      <Flex as="span">
+        Don’t have account yet?&nbsp;
+        <Text
+          color="blue"
+          cursor="pointer"
+          as="span"
+          onClick={() => setElement(DisplayedElement.REGISTER)}
+          _hover={{ opacity: 0.6 }}
+        >
+          Create Account
+        </Text>
+      </Flex>
     </Flex>
   );
 };

@@ -1,7 +1,7 @@
 import { Box, Flex, Grid, useColorModeValue } from "@chakra-ui/react";
 import { routes } from "components/global/AppWrapper/routes";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Logo } from "./Logo/logo";
 import { UserSettings } from "./UserSettings/userSettings";
 
@@ -14,6 +14,13 @@ const NavItem = ({
   path: string;
   content: string;
 }) => {
+  //assigning location variable
+  const location = useLocation();
+
+  //destructuring pathname from location
+  const { pathname } = location;
+
+  //Javascript split method to get the name of the path in array
   return (
     <Link to={path}>
       <Flex
@@ -21,8 +28,8 @@ const NavItem = ({
         padding="15px 20px"
         align="center"
         borderRadius="12px"
-        
         _hover={{ bg: "rgba(0,0,0,0.05)" }}
+        bg={pathname === path ? "rgba(0,0,0,0.05)" : "none"}
       >
         <Flex align="center" opacity="0.4">
           {icon}

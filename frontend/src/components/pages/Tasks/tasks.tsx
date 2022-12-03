@@ -34,13 +34,12 @@ export const Tasks = () => {
 
   const { addTask, tasks } = useUser();
 
-  const [dueDate, setDueDate] = useState(new Date());
   const [taskName, setTaskName] = useState<string>("Task");
   const [urgency, setUrgency] = useState<number>(1);
   const [estimatedTime, setEstimatedTime] = useState<number>(30);
 
   const addNewTask = () => {
-    addTask(dueDate, urgency, taskName, estimatedTime);
+    addTask(new Date(), urgency, taskName, estimatedTime);
   };
 
   return (
@@ -99,13 +98,7 @@ export const Tasks = () => {
                 onChange={(e) => setTaskName(e.target.value)}
               ></Input>
             </Flex>
-            <Flex flexDir="column" gap="12px">
-              <Box>Due date</Box>
-              <ReactDatePicker
-                selected={dueDate}
-                onChange={(date: Date) => setDueDate(date)}
-              />
-            </Flex>
+            
             <Flex flexDir="column" gap="12px">
               <Box>Urgency: {urgency}</Box>
               <Slider

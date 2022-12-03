@@ -10,6 +10,10 @@ import {
   Flex,
   Grid,
   Input,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -63,6 +67,12 @@ export const CalendarColumn = ({
     });
   };
 
+  const handleTimeChange = (value: any) => {
+    setCurrentlyAddedBlock((prev: any) => {
+      return { ...prev, timeSpan: value };
+    });
+  };
+
   return (
     <Grid pos="relative">
       <Flex
@@ -109,7 +119,7 @@ export const CalendarColumn = ({
           setCurrentlyAddedBlock((prev) => {
             return {
               date: d,
-              timeSpan: 4,
+              timeSpan: 2,
               name: "New TimeBlock",
               color: "#aabbff",
             };
@@ -141,17 +151,38 @@ export const CalendarColumn = ({
             <DrawerHeader>Add new time block</DrawerHeader>
 
             <DrawerBody>
-              <Input
-                mb="30px"
-                placeholder="Block name"
-                onChange={(e) => {
-                  if (currentlyAddedBlock != null)
-                    setCurrentlyAddedBlock((prev: any) => {
-                      return { ...prev, name: e.target.value };
-                    });
-                }}
-              />
-              <CirclePicker onChangeComplete={handleChangeComplete} />
+              <Flex flexDir="column" gap="12px">
+                <Box>Task name</Box>
+                <Input
+                  placeholder="Time block name"
+                  onChange={(e) => {
+                    if (currentlyAddedBlock != null)
+                      setCurrentlyAddedBlock((prev: any) => {
+                        return { ...prev, name: e.target.value };
+                      });
+                  }}
+                />
+              </Flex>
+              <Flex justifyContent="center" mt="30px">
+                <CirclePicker onChangeComplete={handleChangeComplete} />
+              </Flex>
+              <Flex flexDir="column" gap="12px">
+                <Box>
+                  Time:{" "}
+                  {currentlyAddedBlock ? currentlyAddedBlock.timeSpan : "0"}
+                </Box>
+                <Slider
+                  aria-label="slider-ex-1"
+                  max={48}
+                  defaultValue={2}
+                  onChange={(val) => handleTimeChange(val)}
+                >
+                  <SliderTrack>
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                  <SliderThumb />
+                </Slider>
+              </Flex>
             </DrawerBody>
 
             <DrawerFooter>

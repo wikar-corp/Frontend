@@ -42,7 +42,7 @@ interface IContext extends IState {
     quarters: number,
     color: string
   ) => void;
-  getSlots: () => void;
+  getSlots: (date: Date) => void;
 }
 
 const emptyContext: IContext = {
@@ -65,7 +65,7 @@ const emptyContext: IContext = {
   // getSlots: () => null,
   saveSlot: (name: string, start: Date, quarters: number, color: string) =>
     null,
-  getSlots: () => null,
+  getSlots: (date: Date) => null,
 };
 
 const Context = createContext(emptyContext);
@@ -154,11 +154,19 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  const getSlots = () => {
+  const getSlots = (date: Date) => {
+    console.log(API_URL + "/slots/getWeek", {
+      dateTime: date,
+      hexIdentificator: state.jwt,
+    });
     axios
-      .get(API_URL + "/slots?hexIdentificator=" + state.jwt)
-      .then((res) => {
-        dispatch({ ...state, blocks: res.data });
+      .post(API_URL + "/slots/getWeek", {
+        dateTime: date,
+        hexIdentificator: state.jwt,
+      })
+      .then((res: any) => {
+        console.log(res);
+        dispatch({ ...state, blocks: res });
         return true;
       })
       .catch((err: any) => {

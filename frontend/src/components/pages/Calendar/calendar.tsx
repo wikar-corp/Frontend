@@ -75,8 +75,13 @@ export const Calendar = () => {
     setMondayDate(addDays(mondayDate, 1 - dayName));
     setSundayDate(addDays(sundayDate, 7 - dayName));
     getWeek(mondayDate);
-    getSlots();
+    getSlots(mondayDate);
+    console.log("slots", getSlots(mondayDate));
   }, []);
+
+  useEffect(() => {
+    console.log("slots", getSlots(mondayDate));
+  }, [mondayDate]);
 
   return (
     <Flex>

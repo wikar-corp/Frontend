@@ -27,7 +27,7 @@ export const LoginOverlay = () => {
       pos="fixed"
       zIndex="9999"
       //test - zamiast tego obsługa załadowania
-
+      display={jwt == "" ? "grid" : "none"}
       //
       w="100vw"
       h="100vh"

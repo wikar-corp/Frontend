@@ -16,7 +16,7 @@ import {
 import { useUser } from "providers/User/useUser";
 import { useState } from "react";
 import { TimeBlock } from "../TimeBlock/timeBlock";
-import { SketchPicker } from "react-color";
+import { CirclePicker } from "react-color";
 
 interface Block {
   date: Date;
@@ -150,7 +150,7 @@ export const CalendarColumn = ({
                     });
                 }}
               />
-              <SketchPicker onChangeComplete={handleChangeComplete} />
+              <CirclePicker onChangeComplete={handleChangeComplete} />
             </DrawerBody>
 
             <DrawerFooter>

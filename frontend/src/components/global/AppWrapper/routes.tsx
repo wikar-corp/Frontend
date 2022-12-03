@@ -19,25 +19,13 @@ export const routes: RouteItem[] = [
   {
     path: "/calendar",
     element: <Calendar />,
-    icon: <CalendarIcon />,
+    icon: <CalendarIcon boxSize="40px"/>,
     name: "calendar",
   },
   {
     path: "/tasks",
     element: <Tasks />,
-    icon: <CheckCircleIcon />,
+    icon: <CheckCircleIcon boxSize="40px"/>,
     name: "tasks",
-  },
-  {
-    path: "/messages",
-    element: <>Messages</>,
-    icon: <EmailIcon />,
-    name: "messages",
-  },
-  {
-    path: "/settings",
-    element: <>Settings</>,
-    icon: <SettingsIcon />,
-    name: "settings",
   },
 ];

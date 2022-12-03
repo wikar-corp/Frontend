@@ -23,7 +23,7 @@ export const UserSettings = () => {
       />
       <Flex justify="center" flexDir="column" gap="6px" lineHeight="100%">
         <Flex fontSize="14px" fontWeight="bold">
-          {nickname}
+          {nickname ? nickname : "Username"}
         </Flex>
         <Flex gap="10px">
           <ColorModeSwitcher />

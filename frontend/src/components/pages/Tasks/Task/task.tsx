@@ -29,6 +29,7 @@ export const Task = ({
   name,
   completed,
   isEditing = false,
+  estimatedTime,
   id,
   urgency,
   minimalInfo = false,
@@ -38,6 +39,7 @@ export const Task = ({
   dueDate: Date;
   name: string;
   id: string;
+  estimatedTime: number,
   completed: boolean;
   isEditing?: boolean;
   minimalInfo?: boolean;
@@ -94,7 +96,7 @@ export const Task = ({
       </Flex>
       <Flex align="center" gap="25px">
         <Flex fontSize="14px" opacity="0.6" fontWeight="bold">
-          45 min
+          {estimatedTime} min
         </Flex>
         <Urgency value={urgency} />
         {!minimalInfo && !drawerInfo && (

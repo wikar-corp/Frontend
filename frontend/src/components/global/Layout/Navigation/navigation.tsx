@@ -25,13 +25,15 @@ const NavItem = ({
     <Link to={path}>
       <Flex
         gap="15px"
-        padding="15px 20px"
+        padding="40px 20px"
         align="center"
         borderRadius="12px"
-        _hover={{ bg: "rgba(0,0,0,0.05)" }}
-        bg={pathname === path ? "rgba(0,0,0,0.05)" : "none"}
+        flexDir="column"
+        _hover={{ bg: "rgba(0,0,0,0.3)" }}
+        bg={pathname === path ? "rgba(0,0,0,0.1)" : "none"}
+
       >
-        <Flex align="center" opacity="0.4">
+        <Flex w="40px" align="center" opacity="0.4">
           {icon}
         </Flex>
         <Box

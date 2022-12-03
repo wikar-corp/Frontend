@@ -37,9 +37,10 @@ export const Tasks = () => {
   const [dueDate, setDueDate] = useState(new Date());
   const [taskName, setTaskName] = useState<string>("Task");
   const [urgency, setUrgency] = useState<number>(1);
+  const [estimatedTime, setEstimatedTime] = useState<number>(30);
 
   const addNewTask = () => {
-    addTask(dueDate, urgency, taskName, 30);
+    addTask(dueDate, urgency, taskName, estimatedTime);
   };
 
   return (
@@ -67,6 +68,7 @@ export const Tasks = () => {
         </Button>
         {tasks.map((el: any) => (
           <Task
+            estimatedTime={el.estimatedMinutes}
             urgency={el.priority}
             completed={el.isCompleted}
             dueDate={new Date()}
@@ -112,6 +114,22 @@ export const Tasks = () => {
                 defaultValue={1}
                 min={1}
                 onChange={(val) => setUrgency(val)}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+            </Flex>
+            <Flex flexDir="column" gap="12px">
+              <Box>Estimated time: {estimatedTime} min.</Box>
+              <Slider
+                aria-label="slider-ex-1"
+                max={240}
+                defaultValue={30}
+                step={15}
+                min={15}
+                onChange={(val) => setEstimatedTime(val)}
               >
                 <SliderTrack>
                   <SliderFilledTrack />

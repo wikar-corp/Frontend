@@ -71,10 +71,15 @@ export const Calendar = () => {
   }, []);
 
   return (
-    <Flex overflow="auto">
+    <Flex>
       <DragDropContext onDragEnd={(result: any) => handleOnDragEnd(result)}>
         <Grid templateRows="auto 1fr" maxH="100vh" bgColor={calendarBg}>
-          <Grid gridColumnStart="0" gridColumnEnd="1">
+          <Grid
+            gridColumnStart="0"
+            gridColumnEnd="1"
+            overflow="auto"
+            maxH="100vh"
+          >
             <CalendarHeader
               mondayDate={mondayDate}
               sundayDate={sundayDate}
@@ -83,13 +88,25 @@ export const Calendar = () => {
               addDays={addDays}
             />
           </Grid>
-          <Grid gridTemplateColumns="auto 1fr" overflowY="scroll">
-            <Grid bg={tasksBg} w="400px" top="0" h="100%">
+          <Grid gridTemplateColumns="auto 1fr" overflow="auto" maxH="100vh">
+            <Grid
+              bg={tasksBg}
+              w="400px"
+              top="0"
+              h="100%"
+              overflowY="scroll"
+              maxH="100vh"
+            >
               <TasksList tasksList={tasksList} />
             </Grid>
-            <Grid gridTemplateColumns="auto 1fr" zIndex="1">
+            <Grid
+              gridTemplateColumns="auto 1fr"
+              zIndex="1"
+              overflow="scroll"
+              maxH="100vh"
+            >
               <Timestamps />
-              <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
+              <Grid templateColumns="repeat(7, 200px)">
                 <CalendarColumn
                   tasksAdded={tasksAdded}
                   updateTasksList={updateTasksList}

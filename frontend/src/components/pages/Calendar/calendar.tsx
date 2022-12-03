@@ -3,6 +3,9 @@ import { useState } from "react";
 import { TasksList } from "./takskList";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { tasks } from "./tasks";
+import { CalendarHeader } from "./CalendarHeader/calendarHeader";
+import { Timestamps } from "./Timestamps/timestamps";
+import { CalendarColumn } from "./CalendarColumn/calendarColumn";
 
 export const Calendar = () => {
   const tasksBg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
@@ -34,27 +37,27 @@ export const Calendar = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={(result: any) => handleOnDragEnd(result)}>
-      <Grid templateColumns="auto 1fr">
-        <Grid bg={tasksBg} w="300px" overflowY="auto" maxH="100vh">
-          <TasksList tasksList={tasksList} />
+    <Grid templateRows="auto 1fr" maxH="100vh">
+      <Grid gridColumnStart="0" gridColumnEnd="1">
+        <CalendarHeader />
+      </Grid>
+      <Grid gridTemplateColumns="auto 1fr" pos="relative" overflowY="scroll">
+        <Grid bg="red" w="200px" pos="sticky" top="0" h="100%">
+          Tasks
         </Grid>
-        <Grid bg={calendarBg}>
-          <Droppable droppableId="slot">
-            {(provided: any) => (
-              <Flex
-                w="100px"
-                h="100px"
-                bgColor="blue"
-                {...provided.draggable}
-                ref={provided.innerRef}
-              >
-                tasks: {num}
-              </Flex>
-            )}
-          </Droppable>
+        <Grid gridTemplateColumns="auto 1fr">
+          <Timestamps />
+          <Grid templateColumns="repeat(7, 200px)" overflow="scroll">
+            <CalendarColumn />
+            <CalendarColumn />
+            <CalendarColumn />
+            <CalendarColumn />
+            <CalendarColumn />
+            <CalendarColumn />
+            <CalendarColumn />
+          </Grid>
         </Grid>
       </Grid>
-    </DragDropContext>
+    </Grid>
   );
 };

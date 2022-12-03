@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Logo } from "../../Layout/Navigation/Logo/logo";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { DisplayedElement } from "./signInForm";
 import axios from "axios";
 import { useUser } from "providers/User/useUser";

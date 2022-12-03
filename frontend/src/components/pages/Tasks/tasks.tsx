@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import { tasks } from "../Calendar/tasks";
 
 import {
   Slider,
@@ -28,18 +27,19 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { Task } from "./Task/task";
 import axios from "axios";
+import { useUser } from "providers/User/useUser";
 
 export const Tasks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { addTask, tasks } = useUser();
 
   const [dueDate, setDueDate] = useState(new Date());
   const [taskName, setTaskName] = useState<string>("Task");
   const [urgency, setUrgency] = useState<number>(1);
 
   const addNewTask = () => {
-
-    
-    console.log(dueDate, taskName, urgency);
+    addTask(dueDate, urgency, taskName, 30);
   };
 
   return (
@@ -67,10 +67,11 @@ export const Tasks = () => {
         </Button>
         {tasks.map((el) => (
           <Task
-            urgency={Math.floor(Math.random() * 5 + 1)}
-            completed={false}
+            urgency={el.priority}
+            completed={el.isCompleted}
             dueDate={new Date()}
-            name={el.name}
+            name={el.taskName}
+            id={el.id}
           />
         ))}
       </Flex>
@@ -92,7 +93,7 @@ export const Tasks = () => {
               <Box>Task name</Box>
               <Input
                 placeholder={"Task name"}
-				defaultValue={"Task name"}
+                defaultValue={"Task name"}
                 onChange={(e) => setTaskName(e.target.value)}
               ></Input>
             </Flex>

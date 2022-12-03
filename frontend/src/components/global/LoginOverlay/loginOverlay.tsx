@@ -17,7 +17,7 @@ export const LoginOverlay = () => {
   useEffect(() => {
 
     if (jwt != "") {
-      alert("XD")
+     
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);

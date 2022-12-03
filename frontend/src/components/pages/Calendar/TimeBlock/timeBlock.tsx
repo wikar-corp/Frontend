@@ -8,6 +8,7 @@ export const TimeBlock = ({
   date,
   timeSpan,
   name,
+  color,
   tasksAdded,
   updateTasksList,
   tasksList,
@@ -16,6 +17,7 @@ export const TimeBlock = ({
   date: Date;
   timeSpan: number;
   name: string;
+  color: string;
   tasksAdded: any;
   updateTasksList: any;
   tasksList: any[];
@@ -54,7 +56,7 @@ export const TimeBlock = ({
 
   return (
     <Grid
-      bg="BRAND"
+      bg={color}
       borderRadius="4px"
       color="white"
       padding="10px"

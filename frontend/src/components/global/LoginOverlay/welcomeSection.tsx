@@ -16,7 +16,7 @@ export const WelcomeSection = () => {
 
   return (
     <Flex
-      bgColor={bg}
+      bg={"linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);"}
       w={signedIn ? "100vw" : "calc(100vw - 450px)"}
       transition="0.5s"
       left={signedIn ? "0" : "-450px"}
@@ -29,14 +29,14 @@ export const WelcomeSection = () => {
       justifyContent="center"
     >
       {signedIn ? (
-        <Spinner boxSize="50px" />
+        <Spinner boxSize="50px"  />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
-          <Flex maxW="700px" flexDirection="column" gap="30px">
-            <Heading fontSize="60px" fontWeight="700">
-                Welcome, it's our hackaton app.
+          <Flex maxW="700px" flexDirection="column" gap="30px" color="white">
+            <Heading fontSize="80px" fontWeight="700">
+              Welcome, it's our hackaton app.
             </Heading>
-            <Text>
+            <Text lineHeight="160%" fontSize="24px">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
               officia sapiente, earum quis, harum quidem eum reprehenderit
               beatae commodi assumenda nostrum veritatis non, odio nemo et

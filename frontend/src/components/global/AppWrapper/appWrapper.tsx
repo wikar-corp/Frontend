@@ -8,7 +8,6 @@ export const AppWrapper = () => {
   return (
     <>
       <LoginOverlay />
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>

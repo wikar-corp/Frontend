@@ -1,11 +1,13 @@
 export interface IState {
   nickname: string;
-  jwt: string
+  jwt: string,
+  tasks: any[]
 }
 
 export const emptyState: IState = {
   nickname: "",
-  jwt: ""
+  jwt: "",
+  tasks: []
 };
 
 export const Reducer = (state: IState, updatedProperties: Partial<IState>) => ({

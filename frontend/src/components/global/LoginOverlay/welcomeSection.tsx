@@ -27,7 +27,7 @@ export const WelcomeSection = () => {
 
   return (
     <Flex
-      bgColor={bg}
+      bg={"linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);"}
       w={signedIn ? "100vw" : "calc(100vw - 450px)"}
       transition="0.5s"
       left={signedIn ? "0" : "-450px"}
@@ -47,7 +47,7 @@ export const WelcomeSection = () => {
             <Heading fontSize="60px" fontWeight="700">
               Welcome, it's our hackaton app.
             </Heading>
-            <Text>
+            <Text lineHeight="160%" fontSize="24px">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
               officia sapiente, earum quis, harum quidem eum reprehenderit
               beatae commodi assumenda nostrum veritatis non, odio nemo et

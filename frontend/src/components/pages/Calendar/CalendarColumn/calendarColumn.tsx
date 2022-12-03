@@ -13,13 +13,16 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useUser } from "providers/User/useUser";
 import { useState } from "react";
 import { TimeBlock } from "../TimeBlock/timeBlock";
+import { SketchPicker } from "react-color";
 
 interface Block {
   date: Date;
   name: string;
   timeSpan: number;
+  color: string;
 }
 
 export const CalendarColumn = ({
@@ -39,17 +42,26 @@ export const CalendarColumn = ({
 
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
 
+  const { addTimeblock } = useUser();
+
   const [blocks, setBlocks] = useState<Block[]>([
     {
       date: new Date(),
       timeSpan: 4,
       name: "something",
+      color: "#aabbff",
     },
   ]);
 
   const [currentlyAddedBlock, setCurrentlyAddedBlock] = useState<Block | null>(
     null
   );
+
+  const handleChangeComplete = (color: any) => {
+    setCurrentlyAddedBlock((prev: any) => {
+      return { ...prev, color: color.hex };
+    });
+  };
 
   return (
     <Grid pos="relative">
@@ -99,6 +111,7 @@ export const CalendarColumn = ({
               date: d,
               timeSpan: 4,
               name: "New TimeBlock",
+              color: "#aabbff",
             };
           });
         }}
@@ -137,6 +150,7 @@ export const CalendarColumn = ({
                     });
                 }}
               />
+              <SketchPicker onChangeComplete={handleChangeComplete} />
             </DrawerBody>
 
             <DrawerFooter>
@@ -156,6 +170,12 @@ export const CalendarColumn = ({
                   onClose();
                   if (currentlyAddedBlock != null) {
                     setBlocks((prev) => prev.concat([currentlyAddedBlock]));
+                    addTimeblock(
+                      currentlyAddedBlock.date,
+                      currentlyAddedBlock.timeSpan,
+                      currentlyAddedBlock.name,
+                      currentlyAddedBlock.color
+                    );
                     setCurrentlyAddedBlock(null);
                   }
                 }}
@@ -172,6 +192,7 @@ export const CalendarColumn = ({
                 date={el.date}
                 timeSpan={el.timeSpan}
                 name={el.name}
+                color={el.color}
                 tasksAdded={tasksAdded}
                 updateTasksList={updateTasksList}
                 tasksList={tasksList}
@@ -186,6 +207,7 @@ export const CalendarColumn = ({
                 date={el.date}
                 timeSpan={el.timeSpan}
                 name={el.name}
+                color={el.color}
                 tasksAdded={tasksAdded}
                 updateTasksList={updateTasksList}
                 tasksList={tasksList}

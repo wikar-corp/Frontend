@@ -5,6 +5,7 @@ import {
   ArrowLeftIcon,
 } from "@chakra-ui/icons";
 import { Box, Flex, Grid, Input, useColorModeValue } from "@chakra-ui/react";
+import { useUser } from "providers/User/useUser";
 import { useState } from "react";
 import { Urgency } from "./Urgency/urgency";
 
@@ -28,6 +29,7 @@ export const Task = ({
   name,
   completed,
   isEditing = false,
+  id,
   urgency,
   minimalInfo = false,
   drawerInfo = false,
@@ -35,6 +37,7 @@ export const Task = ({
 }: {
   dueDate: Date;
   name: string;
+  id: string;
   completed: boolean;
   isEditing?: boolean;
   minimalInfo?: boolean;
@@ -42,10 +45,10 @@ export const Task = ({
   urgency: number;
   onClickLeftArrow?: any;
 }) => {
-  const [innerCompleted, setInnerCompleted] = useState<boolean>(completed);
+  const { deleteTask, tickTask } = useUser();
 
-  const completeTask = () => {
-    setInnerCompleted(!innerCompleted);
+  const handleDeleteTask = () => {
+    deleteTask(id);
   };
 
   const bg = useColorModeValue("white", "#121212");
@@ -58,7 +61,7 @@ export const Task = ({
       bg={bg}
       _hover={{ opacity: 0.6 }}
       transition="0.5s"
-      opacity={innerCompleted ? "0.4" : "1"}
+      opacity={completed ? "0.4" : "1"}
       padding="0px 30px"
       borderRadius="4px"
       data-group
@@ -69,15 +72,15 @@ export const Task = ({
             align="center"
             justify="center"
             borderRadius="50%"
-            onClick={completeTask}
+            onClick={() => tickTask(id, !completed)}
             border="1px solid"
-            borderColor={innerCompleted ? "#2ecc71" : "#e4e4e4"}
+            borderColor={completed ? "#2ecc71" : "#e4e4e4"}
             transition="0.2s"
-            bg={innerCompleted ? "#2ecc71" : "none"}
+            bg={completed ? "#2ecc71" : "none"}
             boxSize="20px"
             cursor="pointer"
           >
-            {innerCompleted && <CheckIcon width="10px" color="white" />}
+            {completed && <CheckIcon width="10px" color="white" />}
           </Flex>
         )}
         <Flex flexDir="column" lineHeight="100%" gap="2px">
@@ -104,6 +107,7 @@ export const Task = ({
             bg="#f6f6f6"
             borderRadius="4px"
             transition="1s width"
+            onClick={handleDeleteTask}
           >
             <CloseIcon w="12px" color="white" />
           </Flex>

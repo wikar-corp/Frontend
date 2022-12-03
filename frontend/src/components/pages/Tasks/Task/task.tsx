@@ -118,7 +118,7 @@ export const Task = ({
             transition="1s width"
             onClick={onClickLeftArrow}
           >
-            <ArrowLeftIcon w="12px" color="white"  />
+            <ArrowLeftIcon w="12px" color="white" />
           </Flex>
         )}
       </Flex>

@@ -27,11 +27,13 @@ export const CalendarColumn = ({
   updateTasksList,
   tasksList,
   setTasksAdded,
+  date,
 }: {
   tasksAdded: any;
   updateTasksList: any;
   tasksList: any[];
   setTasksAdded: any;
+  date: Date;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -60,8 +62,8 @@ export const CalendarColumn = ({
         align="center"
         borderBottom="1px solid gray"
       >
-        <Box>Wtorek</Box>
-        <Box fontSize="24px">21</Box>
+        <Box>{date.toLocaleDateString("en-us", { weekday: "long" })}</Box>
+        <Box fontSize="24px">{date.getDate()}</Box>
       </Flex>
 
       <Grid

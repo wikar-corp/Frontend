@@ -30,6 +30,9 @@ export const TimeBlock = ({
   const [tasksArr, setTasksArr] = useState<any[]>([]);
 
   const { tasks } = useUser();
+  const [allTimeSlot, setAllTimeSlot] = useState(0);
+  const sloteMinutes = timeSpan * 15;
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     const blockIndex = Math.floor(
@@ -37,6 +40,17 @@ export const TimeBlock = ({
     );
     setRow(blockIndex);
   });
+
+  useEffect(() => {
+    let sum = 0;
+    tasks
+      .filter((val) => val.slotId == name)
+      .forEach((el) => {
+        sum += el.estimatedMinutes;
+      });
+
+    setAllTimeSlot(sum);
+  }, [tasks]);
 
   useEffect(() => {
     if (tasksAdded.get(name)) {
@@ -87,10 +101,10 @@ export const TimeBlock = ({
           h="100vh"
           top="0"
           right="0"
-          background={"#dadada"}
+          background={"#f0f0f0"}
           position="fixed"
           zIndex="1"
-          gridTemplateRows="auto 1fr auto"
+          gridTemplateRows="auto auto 1fr auto"
           gap="30px"
           p="25px"
           cursor="default"
@@ -98,7 +112,19 @@ export const TimeBlock = ({
           <Text color="black" fontSize="25px" fontWeight="600">
             {name}
           </Text>
-
+          <Flex direction="column">
+            <Text color="black">
+              {Math.floor((allTimeSlot / (timeSpan * 15)) * 100)}%
+            </Text>
+            <Box bg="gray" w="100%">
+              <Flex
+                w={`${Math.floor((allTimeSlot / (timeSpan * 15)) * 100)}%`}
+                h="20px"
+                maxW="100%"
+                bgColor="#FF3F3F"
+              />
+            </Box>
+          </Flex>
           <Droppable droppableId={name}>
             {(provided: any) => (
               <Flex
@@ -108,7 +134,7 @@ export const TimeBlock = ({
                 gap="10px"
                 color="black"
               >
-                {tasks.filter((val) => val.name === name).length <= 0 && (
+                {tasks.filter((val) => val.slotId === name).length <= 0 && (
                   <Flex
                     h="90%"
                     w="100%"
@@ -125,7 +151,7 @@ export const TimeBlock = ({
                 )}
 
                 {tasks
-                  .filter((val) => val.name === name)
+                  .filter((val) => val.slotId === name)
                   .map((task: any, index) => (
                     <Task
                       urgency={task.priority}
@@ -139,17 +165,19 @@ export const TimeBlock = ({
                       {...provided.dragHandleProps}
                       drawerInfo
                       onClickLeftArrow={() => {
-                        const items = Array.from(tasksList);
-                        items.push(task);
-                        updateTasksList(items);
-                        setTasksArr(
-                          tasksArr.filter((t) => {
-                            return t.id !== task.id;
-                          })
-                        );
-                        setTasksAdded(
-                          (prev: any) => new Map([prev.set(name, tasksArr)])
-                        );
+                        setAllTimeSlot(allTimeSlot - task.estimatedMinutes);
+                        setPercent(allTimeSlot / sloteMinutes);
+                        // const items = Array.from(tasksList);
+                        // items.push(task);
+                        // updateTasksList(items);
+                        // setTasksArr(
+                        //   tasksArr.filter((t) => {
+                        //     return t.id !== task.id;
+                        //   })
+                        // );
+                        // setTasksAdded(
+                        //   (prev: any) => new Map([prev.set(name, tasksArr)])
+                        // );
                       }}
                     />
                   ))}

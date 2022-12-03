@@ -33,7 +33,8 @@ interface IContext extends IState {
   deleteTask: (taskId: string) => void;
   tickTask: (taskId: string, value: boolean) => void;
   getWeek: (date: Date) => void;
-  logout: () => void
+  logout: () => void;
+  moveTask: (taskId: string, slotId: string | null) => void;
 }
 
 const emptyContext: IContext = {
@@ -51,7 +52,8 @@ const emptyContext: IContext = {
   deleteTask: (taskId: string) => null,
   tickTask: (taskId: string, value: boolean) => null,
   getWeek: (date: Date) => null,
-  logout: () => null
+  logout: () => null,
+  moveTask: (taskId: string, slotId: string | null) => null,
 };
 
 const Context = createContext(emptyContext);
@@ -252,14 +254,26 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
+  const moveTask = (taskId: string, slotId: string | null) => {
+    console.log(slotId);
+    const newTasks = state.tasks.map((task) =>
+      task.id === taskId ? { ...task, slotId: slotId } : task
+    );
+
+    dispatch({
+      ...state,
+      tasks: newTasks,
+    });
+  };
+
   const isLogged = useMemo(() => {
     return state.jwt != null;
   }, [state.jwt]);
 
   const logout = () => {
-	  dispatch({...state, jwt: ""})
-	  setToken("")
-  }
+    dispatch({ ...state, jwt: "" });
+    setToken("");
+  };
 
   return (
     <Context.Provider
@@ -268,11 +282,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         addTask,
         tickTask,
         getWeek,
+        moveTask,
         login,
         register,
         addTimeblock,
         deleteTask,
-		logout
+        logout,
       }}
     >
       {children}

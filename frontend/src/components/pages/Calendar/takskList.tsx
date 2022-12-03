@@ -1,51 +1,42 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { tasks } from "./tasks";
 
-export const TasksList = () => {
-  const [tasksList, updateTasksList] = useState(tasks);
-
-  const handleOnDragEnd = (result: any) => {
-    if (!result.destination) return;
-
-    const items = Array.from(tasksList);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    updateTasksList(items);
-  };
-
+export const TasksList = ({ tasksList }: { tasksList: any }) => {
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="tasks">
-        {(provided: any) => (
-          <Flex
-            flexDirection="column"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {tasks.map(({ id, name, desc }, index) => {
-              return (
-                <Draggable key={id} draggableId={id} index={index}>
-                  {(provided: any) => (
-                    <Flex
-                      bgColor="white"
-                      p="10px"
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      {name}
-                    </Flex>
-                  )}
-                </Draggable>
-              );
-            })}
-            {provided.placeholder}
-          </Flex>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <Droppable droppableId="tasks">
+      {(provided: any) => (
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          py="20px"
+          gap="10px"
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+        >
+          {tasksList.map((task: any, index: any) => {
+            return (
+              <Draggable key={task?.id} draggableId={task?.id} index={index}>
+                {(provided: any) => (
+                  <Flex
+                    borderRadius="10px"
+                    width="90%"
+                    bgColor="#dadada"
+                    p="10px"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    {task?.name}
+                  </Flex>
+                )}
+              </Draggable>
+            );
+          })}
+          {provided.placeholder}
+        </Flex>
+      )}
+    </Droppable>
   );
 };

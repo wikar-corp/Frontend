@@ -1,4 +1,8 @@
-import { ArrowRightIcon, CalendarIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  ArrowRightIcon,
+  CalendarIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -11,7 +15,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
       {(provided: any) => (
         <Flex
           flexDirection="column"
-          alignItems="center"
+          //alignItems="center"
           pb="20px"
           borderRight="1px solid #ebebeb"
           gap="10px"
@@ -42,9 +46,17 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
               </Flex>
             </Link>
           </Flex>
-          {tasksList.length === 0 && <Flex align="center" mt="50px" flexDir='column' gap="30px">
-            <CalendarIcon boxSize="80px" opacity='0.5' /><Box>
-            No tasks yet. <Box display="inline" fontWeight="bold"><Link to="/tasks">Let's add one!</Link></Box></Box></Flex>}
+          {tasksList.length === 0 && (
+            <Flex align="center" mt="50px" flexDir="column" gap="30px">
+              <CalendarIcon boxSize="80px" opacity="0.5" />
+              <Box>
+                No tasks yet.{" "}
+                <Box display="inline" fontWeight="bold">
+                  <Link to="/tasks">Let's add one!</Link>
+                </Box>
+              </Box>
+            </Flex>
+          )}
           {tasksList
             .filter((el) => el.isCompleted == false)
             .map((task: any, index: any) => {
@@ -64,6 +76,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
                         name={task.taskName}
                         id={task.id}
                         minimalInfo
+                        estimatedTime={task.estimatedMinutes}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}

@@ -37,6 +37,7 @@ export const WelcomeSection = () => {
       }}
       //
       alignItems="center"
+      borderRadius="0 80px 80px 0"
       justifyContent="center"
     >
       {signedIn ? (
@@ -48,7 +49,8 @@ export const WelcomeSection = () => {
               Welcome to Timenage.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">
-              Application that helps to integrate work time as efficiently as&nbsp;possible in your daily life! 
+              Application that helps to integrate work time as efficiently
+              as&nbsp;possible in your daily life!
             </Text>
           </Flex>
         </Flex>

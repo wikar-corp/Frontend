@@ -34,7 +34,7 @@ export const Tasks = () => {
 
   const { addTask, tasks } = useUser();
 
-  const [dueDate, setDueDate] = useState(new Date());
+  const [dueDate, setDueDate] = useState(Date.now().toString());
   const [taskName, setTaskName] = useState<string>("Task");
   const [urgency, setUrgency] = useState<number>(1);
   const [estimatedTime, setEstimatedTime] = useState<number>(30);

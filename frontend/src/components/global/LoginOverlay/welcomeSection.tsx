@@ -45,7 +45,7 @@ export const WelcomeSection = () => {
         <Flex width="100%" overflowWrap="break-word" p="80px">
           <Flex maxW="700px" flexDirection="column" gap="30px">
             <Heading fontSize="60px" fontWeight="700">
-              Welcome, it's our hackaton app.
+              Welcome to SampleName.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore

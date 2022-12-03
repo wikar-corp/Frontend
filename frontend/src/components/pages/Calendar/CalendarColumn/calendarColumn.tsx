@@ -8,6 +8,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   Grid,
   Input,
   useColorModeValue,
@@ -41,9 +42,11 @@ export const CalendarColumn = () => {
 
   return (
     <Grid pos="relative">
-      <Box h="40px" w="100%" pos="sticky" top="0">
-        Wtorek
-      </Box>
+      <Flex flexDir="column" h="70px" w="100%" pos="sticky" top="0" align="center" borderBottom="1px solid gray">
+		  <Box>Wtorek</Box>
+		  <Box fontSize="24px">21</Box>
+        
+      </Flex>
 
       <Grid
         onClick={(e: any) => {

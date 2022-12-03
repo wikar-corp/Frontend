@@ -4,7 +4,7 @@ export const Timestamps = () => {
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
 
   return (
-    <Grid w="100px" >
+    <Grid w="100px" mt="70px" >
       {Array.from(Array(24).keys()).map((el, index) => {
 		
         return (

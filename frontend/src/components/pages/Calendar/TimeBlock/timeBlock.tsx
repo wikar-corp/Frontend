@@ -24,6 +24,8 @@ export const TimeBlock = ({
     <Grid
       bg="BRAND"
       borderRadius="4px"
+	  color='white'
+		padding="10px"
       gridRowStart={row}
       gridRowEnd={row + timeSpan}
       onClick={(e) => {

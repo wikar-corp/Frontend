@@ -32,6 +32,7 @@ interface IContext extends IState {
   ) => void;
   deleteTask: (taskId: string) => void;
   tickTask: (taskId: string, value: boolean) => void;
+  getWeek: (date: Date) => void;
 }
 
 const emptyContext: IContext = {
@@ -48,6 +49,7 @@ const emptyContext: IContext = {
   ) => null,
   deleteTask: (taskId: string) => null,
   tickTask: (taskId: string, value: boolean) => null,
+  getWeek: (date: Date) => null,
 };
 
 const Context = createContext(emptyContext);
@@ -93,6 +95,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       .then((res) => {
         console.log(res);
 
+        return true;
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
+
+  const getWeek = () => {
+    axios
+      .get(API_URL + "/getWeek")
+      .then((res) => {
+        console.log(res);
         return true;
       })
       .catch((err: any) => {
@@ -246,6 +260,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         ...state,
         addTask,
         tickTask,
+        getWeek,
         login,
         register,
         addTimeblock,

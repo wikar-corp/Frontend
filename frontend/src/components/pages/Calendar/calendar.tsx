@@ -2,10 +2,10 @@ import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TasksList } from "./takskList";
 import { DragDropContext } from "react-beautiful-dnd";
-import { tasks } from "./tasks";
 import { CalendarHeader } from "./CalendarHeader/calendarHeader";
 import { Timestamps } from "./Timestamps/timestamps";
 import { CalendarColumn } from "./CalendarColumn/calendarColumn";
+import { useUser } from "providers/User/useUser";
 
 export const Calendar = () => {
   const tasksBg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
@@ -13,6 +13,8 @@ export const Calendar = () => {
     "BACKGROUND_1.LIGHT",
     "BACKGROUND_1.DARK"
   );
+
+  const { tasks } = useUser()
 
   const [num, setNum] = useState<number>(0);
   const [tasksList, updateTasksList] = useState(tasks);
@@ -97,7 +99,7 @@ export const Calendar = () => {
               overflowY="scroll"
               maxH="100vh"
             >
-              <TasksList tasksList={tasksList} />
+              <TasksList tasksList={tasks} />
             </Grid>
             <Grid
               gridTemplateColumns="auto 1fr"

@@ -18,40 +18,58 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
           {...provided.droppableProps}
           ref={provided.innerRef}
           zIndex="999"
-        > 
-          <Flex padding="15px 35px" align="center" justifyContent="space-between"  fontSize="20px" bg="white" fontWeight="bold"  borderBottom="1px solid rgba(0,0,0,0.1)">
+        >
+          <Flex
+            padding="15px 35px"
+            align="center"
+            justifyContent="space-between"
+            fontSize="20px"
+            bg="white"
+            fontWeight="bold"
+            borderBottom="1px solid rgba(0,0,0,0.1)"
+          >
             Active tasks
-            <Link to="/tasks"><Flex  gap="15px" align="center" fontWeight="light" fontSize="13px">
-              Task List
-              <ArrowRightIcon color="gray"/>
-              </Flex></Link>
+            <Link to="/tasks">
+              <Flex
+                gap="15px"
+                align="center"
+                fontWeight="light"
+                fontSize="13px"
+              >
+                Task List
+                <ArrowRightIcon color="gray" />
+              </Flex>
+            </Link>
           </Flex>
           {tasksList.length === 0 && "no tasks"}
-          {tasksList.map((task: any, index: any) => {
-            return (
-              <Draggable key={task.id} draggableId={task.id} index={index}>
-                {(provided: any) => (
-                  <Box
-                    px="6px"
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Task
-                      dueDate={new Date()}
-                      name={task.name}
-                      completed={false}
-                      urgency={3}
-                      minimalInfo
+          {tasksList
+            .filter((el) => el.isCompleted == false)
+            .map((task: any, index: any) => {
+              return (
+                <Draggable key={task.id} draggableId={task.id} index={index}>
+                  {(provided: any) => (
+                    <Box
+                      px="6px"
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                    />
-                  </Box>
-                )}
-              </Draggable>
-            );
-          })}
+                    >
+                      <Task
+                        id={task.id}
+                        dueDate={new Date()}
+                        name={task.name}
+                        completed={task.isCompleted}
+                        urgency={task.priority}
+                        minimalInfo
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      />
+                    </Box>
+                  )}
+                </Draggable>
+              );
+            })}
           {provided.placeholder}
         </Flex>
       )}

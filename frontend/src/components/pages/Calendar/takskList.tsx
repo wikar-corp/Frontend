@@ -24,7 +24,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
             align="center"
             justifyContent="space-between"
             fontSize="20px"
-            bg="white"
+            bg="none"
             fontWeight="bold"
             borderBottom="1px solid rgba(0,0,0,0.1)"
           >

@@ -65,7 +65,7 @@ export const Tasks = () => {
             +
           </Box>
         </Button>
-        {tasks.map((el) => (
+        {tasks.map((el: any) => (
           <Task
             urgency={el.priority}
             completed={el.isCompleted}
@@ -105,7 +105,7 @@ export const Tasks = () => {
               />
             </Flex>
             <Flex flexDir="column" gap="12px">
-              <Box>Urgency</Box>
+              <Box>Urgency: {urgency}</Box>
               <Slider
                 aria-label="slider-ex-1"
                 max={5}
@@ -127,6 +127,7 @@ export const Tasks = () => {
               mr={3}
               onClick={() => {
                 onClose();
+                setUrgency(1);
               }}
             >
               Cancel
@@ -136,6 +137,7 @@ export const Tasks = () => {
               onClick={() => {
                 addNewTask();
                 onClose();
+                setUrgency(1);
               }}
             >
               Save

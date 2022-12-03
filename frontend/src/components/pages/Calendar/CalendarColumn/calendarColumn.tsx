@@ -79,6 +79,7 @@ export const CalendarColumn = ({
       </Flex>
 
       <Grid
+        bgColor={bg}
         onClick={(e: any) => {
           var rect = e.target.getBoundingClientRect();
 
@@ -123,8 +124,8 @@ export const CalendarColumn = ({
 		to bottom,
 		${"white"} 0px,
 		${"white"} 79px,
-		${"gray"} 80px,
-		${"gray"} 79px
+		${"grey"} 80px,
+		${"grey"} 79px
 	  )`}
       >
         <Drawer

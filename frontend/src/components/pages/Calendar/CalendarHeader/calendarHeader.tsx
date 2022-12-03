@@ -15,6 +15,7 @@ export const CalendarHeader = ({
   addDays: (date: Date, days: number) => Date;
 }) => {
   const bg = useColorModeValue("BACKGROUND_2.LIGHT", "BACKGROUND_2.DARK");
+  const text = useColorModeValue("black", "white");
 
   return (
     <Flex
@@ -23,7 +24,7 @@ export const CalendarHeader = ({
       justifyContent="space-between"
       borderBottom="1px solid rgba(0,0,0,0.1)"
     >
-      <Flex fontSize="40px" color="black">
+      <Flex fontSize="40px" color={text}>
         {mondayDate.getDate()}-{sundayDate.getDate()}
         &nbsp;{mondayDate.toLocaleString("en-us", { month: "long" })}
       </Flex>

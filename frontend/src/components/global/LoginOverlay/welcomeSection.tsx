@@ -40,11 +40,11 @@ export const WelcomeSection = () => {
       justifyContent="center"
     >
       {signedIn ? (
-        <Spinner boxSize="50px"  />
+        <Spinner boxSize="50px" />
       ) : (
         <Flex width="100%" overflowWrap="break-word" p="80px">
-          <Flex maxW="700px" flexDirection="column" gap="30px" color="white">
-            <Heading fontSize="80px" fontWeight="700">
+          <Flex maxW="700px" flexDirection="column" gap="30px">
+            <Heading fontSize="60px" fontWeight="700">
               Welcome, it's our hackaton app.
             </Heading>
             <Text lineHeight="160%" fontSize="24px">

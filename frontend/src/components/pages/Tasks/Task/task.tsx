@@ -4,7 +4,7 @@ import {
   DeleteIcon,
   ArrowLeftIcon,
 } from "@chakra-ui/icons";
-import { Box, Flex, Grid, Input } from "@chakra-ui/react";
+import { Box, Flex, Grid, Input, useColorModeValue } from "@chakra-ui/react";
 import { useUser } from "providers/User/useUser";
 import { useState } from "react";
 import { Urgency } from "./Urgency/urgency";
@@ -45,20 +45,21 @@ export const Task = ({
   urgency: number;
   onClickLeftArrow?: any;
 }) => {
-
   const { deleteTask, tickTask } = useUser();
 
   const handleDeleteTask = () => {
     deleteTask(id);
   };
 
+  const bg = useColorModeValue("white", "#121212");
+
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
       h="70px"
-      bg="white"
-      _hover={{ bg: "#fbfbfb" }}
+      bg={bg}
+      _hover={{ opacity: 0.6 }}
       transition="0.5s"
       opacity={completed ? "0.4" : "1"}
       padding="0px 30px"

@@ -11,7 +11,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
       {(provided: any) => (
         <Flex
           flexDirection="column"
-          //alignItems="center"
+          alignItems="center"
           pb="20px"
           borderRight="1px solid #ebebeb"
           gap="10px"
@@ -23,6 +23,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
             padding="15px 35px"
             align="center"
             justifyContent="space-between"
+            width="100%"
             fontSize="20px"
             bg="none"
             fontWeight="bold"
@@ -41,7 +42,7 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
               </Flex>
             </Link>
           </Flex>
-          {tasksList.length === 0 && "no tasks"}
+          {tasksList.length === 0 && <Flex>No tasks yet</Flex>}
           {tasksList
             .filter((el) => el.isCompleted == false)
             .map((task: any, index: any) => {
@@ -55,11 +56,11 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
                       {...provided.dragHandleProps}
                     >
                       <Task
-                        id={task.id}
-                        dueDate={new Date()}
-                        name={task.name}
-                        completed={task.isCompleted}
                         urgency={task.priority}
+                        completed={task.isCompleted}
+                        dueDate={new Date()}
+                        name={task.taskName}
+                        id={task.id}
                         minimalInfo
                         ref={provided.innerRef}
                         {...provided.draggableProps}

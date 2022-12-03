@@ -171,7 +171,7 @@ export const CalendarColumn = ({
               <Flex flexDir="column" gap="12px">
                 <Box>
                   Time:{" "}
-                  {currentlyAddedBlock ? currentlyAddedBlock.timeSpan : "0"}
+                  {currentlyAddedBlock ? currentlyAddedBlock.timeSpan * 15 : "0"} minutes
                 </Box>
                 <Slider
                   aria-label="slider-ex-1"

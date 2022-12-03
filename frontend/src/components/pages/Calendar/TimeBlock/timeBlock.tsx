@@ -122,10 +122,11 @@ export const TimeBlock = ({
                 )}
                 {tasksArr.map((task: any, index) => (
                   <Task
+                    urgency={task.priority}
+                    completed={task.isCompleted}
                     dueDate={new Date()}
-                    name={task.name}
-                    completed={false}
-                    urgency={3}
+                    name={task.taskName}
+                    id={task.id}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

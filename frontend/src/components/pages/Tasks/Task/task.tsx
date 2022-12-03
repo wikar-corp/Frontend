@@ -52,6 +52,7 @@ export const Task = ({
   };
 
   const bg = useColorModeValue("white", "#121212");
+  const text = useColorModeValue("black", "white");
 
   return (
     <Flex
@@ -84,7 +85,13 @@ export const Task = ({
           </Flex>
         )}
         <Flex flexDir="column" lineHeight="100%" gap="2px">
-          <Box fontSize="16px" opacity="0.8" fontWeight="bold" mt="2px">
+          <Box
+            fontSize="16px"
+            opacity="0.8"
+            fontWeight="bold"
+            mt="2px"
+            color={text}
+          >
             {name}
           </Box>
           <Flex fontSize="13px" fontWeight="300" color="#9B9B9B">

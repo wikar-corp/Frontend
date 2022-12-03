@@ -55,11 +55,11 @@ export const TasksList = ({ tasksList }: { tasksList: any[] }) => {
                       {...provided.dragHandleProps}
                     >
                       <Task
-                        id={task.id}
-                        dueDate={new Date()}
-                        name={task.name}
-                        completed={task.isCompleted}
                         urgency={task.priority}
+                        completed={task.isCompleted}
+                        dueDate={new Date()}
+                        name={task.taskName}
+                        id={task.id}
                         minimalInfo
                         ref={provided.innerRef}
                         {...provided.draggableProps}
